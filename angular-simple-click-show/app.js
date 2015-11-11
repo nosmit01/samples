@@ -1,4 +1,4 @@
-angular.module('acumenity', [])
+angular.module('sample', [])
 
 .controller('LibraryCtrl', ['$scope', function($scope) {
     $scope.categories = categories;
