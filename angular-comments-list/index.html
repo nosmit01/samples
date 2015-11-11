@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html ng-app="sample">
+<head>
+    <title>Sample Angular comment list</title>
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap.min.css" />
+    <link rel="stylesheet/less" type="text/css" href="app.less" />
+</head>
+
+<body ng-controller="DiscussionCtrl as vm" ng-cloak>
+<div class="container">
+    <h1>Discussions</h1>
+
+    <!--TOPICS-->
+    <ul class="topics unstyled"
+        ng-repeat="topic in vm.discussion.topics">
+
+        <li>
+            <div class="well well-large">
+                <div class="topic">
+                    <p class="lead"><strong>{{topic.topictitle}}</strong></p>
+                    <div class="actions">
+                        <button class="btn btn-primary" ng-click="topic.commentBtn = true">Comment</button>
+                    </div>
+                </div>
+                <div class="comment well" ng-if="topic.commentBtn">
+                    Comment
+                    <textarea ng-model="topic.comment"></textarea>
+                    <div class="actions row-fluid">
+                        <button class="btn" ng-click="vm.cancelComment(topic);">
+                            Cancel
+                        </button>
+                        <button class="btn" ng-click="vm.addComment(topic, $parent.$index);">
+                            Done
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--RESPONSES-->
+            <ul>
+                <li class="responses well"
+                    ng-repeat="response in topic.responses"
+                    inset-list
+                    depth="response.depth">
+                    <div class="response">
+                        <p>{{response.posttext | clean}}</p>
+                        <div class="actions row-fluid">
+                            <div class="span2">
+                                <button class="btn btn-info" ng-click="response.replyBtn = true">Reply</button>
+                            </div>
+                            <div class="meta span6 offset4">
+                                <span class="label">{{response.age | moment}} by {{response.author}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="reply well" ng-if="response.replyBtn">
+                        Reply
+                        <textarea ng-model="response.reply"></textarea>
+                        <div class="actions">
+                            <button class="btn" ng-click="vm.cancelResponse(response);">
+                                Cancel
+                            </button>
+                            <button class="btn" ng-click="vm.addResponse(response, $parent.$index, $parent.$parent.$index);">
+                                Done
+                            </button>
+                        </div>
+                    </form>
+
+                </li>
+            </ul>
+
+        </li>
+
+    </ul>
+</div>
+<script src="vendor/angular.min.js"></script>
+<script src="vendor/less.min.js"></script>
+<script src="vendor/moment.js"></script>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
