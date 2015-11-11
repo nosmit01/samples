@@ -1,0 +1,21 @@
+<ul class="list-inline">
+  <li><a ui-sref="accounts">Ad Accounts</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+  <li>Ad Campaigns</li>
+</ul>
+
+<table class="table table-hover table-striped">
+  <thead>
+  <tr>
+    <th>Campaign Id</th>
+    <th>Campaign Name</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="campaign in campaigns">
+    <td>{{campaign.id}}</td>
+    <td>{{campaign.name}}</td>
+    <td><a ui-sref="groups({id: campaign.id, accountId: accountId})" class="btn btn-primary">View Ad Sets</a></td>
+  </tr>
+  </tbody>
+</table>

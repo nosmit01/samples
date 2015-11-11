@@ -1,0 +1,20 @@
+<ul class="list-inline">
+  <li><a ui-sref="accounts">Ad Accounts</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+  <li><a ui-sref="campaigns({id: accountId})">Ad Campaigns</a><span class="glyphicon glyphicon-chevron-right"></span></li>
+  <li>Ad Groups</li>
+</ul>
+
+<table class="table table-hover table-striped">
+  <thead>
+  <tr>
+    <th>Group Id</th>
+    <th>Group Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="group in groups">
+    <td>{{group.id}}</td>
+    <td>{{group.name}}</td>
+  </tr>
+  </tbody>
+</table>

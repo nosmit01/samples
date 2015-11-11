@@ -1,0 +1,20 @@
+var categories =[
+  {name: "cat_1", source: "Source 1", tenancy:"Public", display:"Cat 1"},
+  {name: "cat_2", source: "Source 2", tenancy:"Private", display:"Cat Type 2"},
+  {name: "cat_3", source: "Source 3.2", tenancy:"Public", display:"Cat Name 3"},
+  {name: "cat_4", source: "Source 4", tenancy:"Public", display:"Cat Name 4"},
+  {name: "cat_5", source: "5th Source", tenancy:"Public", display:"#5 Cat"},
+  {name: "cat_6", source: "6th Source", tenancy:"Private", display:"#6 Cat"},
+  {name: "cat_7", source: "7th Source", tenancy:"Private", display:"#7 Type Cat"},
+  {name: "cat_8", source: "Source 8.1", tenancy:"Private", display:"#8 Cat Type"},
+  {name: "cat_9", source: "Source 9", tenancy:"Public", display:"#9 Cat Type"},
+  {name: "cat_10", source: "Source 10", tenancy:"Private", display:"#10 Type of Cat"},
+  {name: "cat_11", source: "Source number 11", tenancy:"Public", display:"Cat 11"},
+  {name: "cat_12", source: "Source #12", tenancy:"Private", display:"Cat 12"},
+  {name: "cat_13", source: "Source num 13", tenancy:"Public", display:"Cat 13"},
+  {name: "cat_14", source: "Source num 14", tenancy:"Public", display:"Cat 14 type"},
+  {name: "cat_15", source: "Source num 15", tenancy:"Private", display:"Type Cat 15"},
+  {name: "cat_16", source: "16th Source", tenancy:"Public", display:"Type 16 cat"},
+  {name: "cat_17", source: "17th source", tenancy:"Public", display:"17th Cat"},
+  {name: "cat_18", source: "18th Source", tenancy:"Private", display:"18th Cat"}
+];

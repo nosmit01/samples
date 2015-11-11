@@ -1,0 +1,20 @@
+<ul class="list-inline">
+  <li>Ad Accounts</li>
+</ul>
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Account Id</th>
+      <th>Account Name</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="account in accounts">
+      <td>{{account.id}}</td>
+      <td>{{account.name}}</td>
+      <td><a ui-sref="campaigns({id: account.id})" class="btn btn-primary">View Campaigns</a></td>
+    </tr>
+  </tbody>
+</table>
