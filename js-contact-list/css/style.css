@@ -1,0 +1,131 @@
+/*Naeem Smith for Cloud Sherpas - 10/17/13  
+Contact: naeem.smith at gmail.com, http://smittyology.com*/
+.clear{
+	clear:both;
+}
+ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+body{
+	font-family:Helvetica, Arial, sans-serif;
+}
+
+header#title h1{
+	display:inline-block;
+	margin-right:15px;
+	color:#2E2E2E;
+}
+header#title a{
+	font-size:10px;
+}
+.fixed{
+	position:fixed;
+	top:0;
+}
+
+
+.bg-dark{
+	background:#2e2e2e;
+	padding:15px 10px;
+	color:#C4C5C7;
+	height:48px;
+	position:absolute;
+}
+	.bg-dark h2{
+		padding:0;
+		margin:0;
+		text-align:center;
+		font-size:13px;
+	}
+	.bg-dark ul, .bg-dark li{
+		display:inline-block;
+	}
+	.bg-dark li{
+		margin:0 5px;
+	}
+		.bg-dark li:hover{
+			cursor:pointer;
+		}
+
+section#contacts .bg-dark{
+	font-size:11px;
+	font-weight:bold;
+}
+	section#contacts .bg-dark span, section#contacts .bg-dark ul{
+		position:relative;
+		top:-1px;
+	}
+li.contact{
+	color:#8E9092;
+	font-size:14px;
+}
+	li.contact li{
+		border:1px solid #eee;
+		padding:10px;
+	}
+	
+	ul.list-view li.contact{
+		display:block;
+		clear:both;
+	}
+	ul.list-view li.contact span{
+		font-size:20px;
+		display:inline-block;
+		vertical-align:middle;
+	}
+	ul.list-view li.contact img{
+		display:inline-block;
+		width:8%;
+		margin-right:20px;
+	}
+	ul.grid-view li.contact{
+		display:inline-block;
+		width:25%;
+		text-align:center;
+	}
+	ul.grid-view li.contact img{
+		margin:0 auto;
+	}
+	
+li.contact-info span{
+	font-weight:bold;
+	font-size:13px;
+}
+li.selected  li:first-child{
+	background:#6ECEDF;
+	color:#fff;
+}
+
+.select-btns{
+	border-radius:1px;
+	background:#fff;
+	padding:5px 10px;
+	color:#8E9092;
+}
+ul#view-toggle{
+	float:right;
+}
+	ul#view-toggle li{
+		width:27px;
+		height:20px;
+	}
+li#list-toggle{
+	background:url('../img/assets.png')0 -31px no-repeat;
+}
+	li#list-toggle:hover{
+		background-position:0 -11px;
+	}
+li.list-selected{
+	background:url('../img/assets.png')0 -11px no-repeat !important;
+}
+li#grid-toggle{
+	background:url('../img/assets.png')0 -71px no-repeat;
+}
+	li#grid-toggle:hover{
+		background-position:0 -51px;
+	}
+li.grid-selected{
+	background:url('../img/assets.png')0 -51px no-repeat !important;
+}
