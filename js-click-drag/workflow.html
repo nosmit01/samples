@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Workflow</title>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+        <link rel="stylesheet" href="css/jquery.contextMenu.css">
+        <link rel="stylesheet" href="css/spectrum.css">
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+	<body>
+	<div id="workflow">
+		<div id="nodes">
+      <h3>Click and drag node to stage</h3>
+			<ul>
+				<li><div class="newNode drag" data-type="activity"><strong>Activity <br>Node</strong><br/><br/></div></li>
+                <li><div class="newNode drag" data-type="process"><strong>Process <br>Node</strong><br/><br/></div></li>
+                <li><div class="newNode drag" data-type="subactivity"><strong>Sub-<br>Activity Node</strong><br/><br/></div></li>
+                <li><div class="newNode drag" data-type="task"><strong>Task <br>Node</strong><br/><br/></div></li>
+                <li><div class="newNode drag" data-type="decision"><strong>Decision <br>Node</strong><br/><br/></div></li>
+			</ul>
+		</div>
+
+		<div class="stage" id="stage">
+			<div class="node obj" id="activityNode1">
+				<div class="nodeHeader">Sort and Justify</div>
+				<div class="nodeBody"></div>
+				<div class="nodeFooter"><span class="nodeMore">More</span></div>
+                <div class="nodeMeta">
+                    Meta Content
+                    <br><br><br><br><br><br><br>
+
+                </div>
+			</div>
+
+			<div class="node obj" id="activityNode2">
+				<div class="nodeHeader">Sort and Justify</div>
+				<div class="nodeBody"></div>
+				<div class="nodeFooter"><span class="nodeMore">More</span></div>
+                <div class="nodeMeta">
+                    Meta Content
+                    <br><br><br><br><br><br><br>
+
+                </div>
+			</div>
+			<div class="node obj" id="activityNode3">
+				<div class="nodeHeader">Sort and Justify</div>
+				<div class="nodeBody"></div>
+				<div class="nodeFooter"><span class="nodeMore">More</span></div>
+                <div class="nodeMeta">
+                    Meta Content
+                    <br><br><br><br><br><br><br>
+
+                </div>
+			</div>
+			<div class="node obj" id="activityNode4">
+				<div class="nodeHeader">Sort and Justify</div>
+				<div class="nodeBody"></div>
+				<div class="nodeFooter"><span class="nodeMore">More</span></div>
+                <div class="nodeMeta">
+                    Meta Content
+                    <br><br><br><br><br><br><br>
+
+                </div>
+			</div>
+		</div>
+	</div>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+	<script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/jquery.jeditable.mini.js"></script>
+	<script src="js/jquery.jsPlumb-1.5.5-min.js"></script>
+    <script src="js/jquery.contextMenu.js"></script>
+
+    <script src="js/spectrum.js"></script>
+	<script src="js/main.js"></script>
+	</body>
+</html>
