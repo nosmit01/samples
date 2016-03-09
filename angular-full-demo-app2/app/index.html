@@ -1,0 +1,24 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+      <base href="/">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title ng-bind="pageTitle"></title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body class="ng-cloak">
+    <div class="shell container-fluid" ng-controller="NavCtrl as vm">
+        <h1 class="heading col-md-4">
+            <span>PARKING APP</span>
+        </h1>
+    </div>
+    <div class="container-fluid" ui-view></div>
+
+    <script src="js/vendors.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebase-util/0.2.5/firebase-util.min.js"></script>
+  </body>
+</html>

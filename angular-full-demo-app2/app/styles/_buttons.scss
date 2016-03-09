@@ -1,0 +1,10 @@
+.btn-default {
+  background-color: #fff;
+  -webkit-transition: background-color 0.2s ease-in-out;
+  -moz-transition: background-color 0.2s ease-in-out;
+  -o-transition: background-color 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+}
+.btn-default:hover{
+  background-color: #e6e6e6;
+}

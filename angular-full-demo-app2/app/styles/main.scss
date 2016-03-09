@@ -1,0 +1,13 @@
+@import "bootstrap.min.scss";
+@import "font-awesome.min.scss";
+@import 'vars';
+@import 'typography';
+@import 'icons';
+@import 'fonts';
+@import 'alerts';
+@import 'charts';
+@import 'buttons';
+
+//sections
+@import 'shell';
+@import 'dashboard';

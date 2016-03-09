@@ -1,0 +1,10 @@
+.highcharts-contextmenu{
+  div{
+    > div{
+      line-height:20px;
+    }
+    hr{
+      margin: 0 0 10px;
+    }
+  }
+}

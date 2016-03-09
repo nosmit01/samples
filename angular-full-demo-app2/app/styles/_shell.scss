@@ -1,0 +1,56 @@
+body {
+  font-family: 'whitneyMedium', sans-serif;
+  color: $font-color--dark;
+  background-color: #fff;
+  /*padding: $half-space;*/
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+.shell{
+
+  h1{
+    margin-bottom:0;
+  }
+
+  .nav{
+    font-size:25px;
+    margin: 20px 0 0;
+    padding: 0;
+
+    li{
+      display:inline-block;
+      float:right;
+
+      a{
+        padding: 20px 8px 0;
+        color: #000;
+        height: 50px;
+        cursor: pointer;
+        margin: 0 5px;
+
+        -webkit-transition: border-bottom 0.5s ease-in-out;
+        -moz-transition: border-bottom 0.5s ease-in-out;
+        -o-transition: border-bottom 0.5s ease-in-out;
+        transition: border-bottom 0.5s ease-in-out;
+
+        border-bottom: 5px solid #fff;
+
+        &:hover{
+          border-bottom: 5px solid $spotlight-green;
+          background: none;
+        }
+      }
+
+      &.active{
+        a{
+          border-bottom: 5px solid $spotlight-green;
+          background: none;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

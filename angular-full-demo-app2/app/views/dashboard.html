@@ -1,0 +1,161 @@
+<div id="filter-bar" class="row bg-dark-bar" ng-cloak>
+    <h3 class="col-md-1">FILTERS</h3>
+    <ul class="col-md-10 list-inline filter-list">
+        <li ng-repeat="item in vm.filters.selected track by $index">
+            <i class="icons i-delete" ng-click="vm.removeFilter($index, item)"></i>
+            <span class="filter-cat">{{item.category}}:</span>
+            {{item.display}}
+        </li>
+    </ul>
+    <div class="col-md-1 btn-group" uib-dropdown is-open="status.isopen">
+        <span id="single-button" class="btn-group col-md-8 pull-right text-right" uib-dropdown-toggle ng-disabled="disabled">
+            <i class="fa fa-plus-circle fa-4x"></i>
+        </span>
+        <ul class="uib-dropdown-menu pull-right" role="menu" aria-labelledby="single-button" >
+            <li class="dropdown-submenu pull-left col-md-12" ng-repeat="(key, item) in vm.filters.options">
+                <a href="#">{{item.display}}</a>
+                <ul class="dropdown-menu second">
+                    <li ng-if="vm.checkRole(subItem.roles)" class="dropdown-submenu pull-left col-md-12" ng-repeat="subItem in item.items">
+                        <a href="#">{{subItem.display}}</a>
+                        <ul class="dropdown-menu third">
+                            <li ng-repeat="subSubItem in subItem.items" class="col-md-12" ng-class="{selected: subSubItem.selected}">
+                                <a href="#" ng-click="vm.runFilter($index, item, subItem, subSubItem)">
+                                    {{subSubItem.display}}
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="date-range" class="row text-center" ng-cloak>
+    <ul class="list-inline">
+        <li ng-class="{'range-default': vm.dateRange.type !== 'day', 'range-active': vm.dateRange.type === 'day'}" ng-click="vm.setDateRange('day')"><h3>DAY</h3></li>
+        <li ng-class="{'range-default': vm.dateRange.type !== 'week', 'range-active': vm.dateRange.type === 'week'}" ng-click="vm.setDateRange('week')"><h3>WEEK</h3></li>
+        <li ng-class="{'range-default': vm.dateRange.type !== 'month', 'range-active': vm.dateRange.type === 'month'}" ng-click="vm.setDateRange('month')"><h3>MONTH</h3></li>
+        <li ng-class="{'range-default': vm.dateRange.type !== 'year', 'range-active': vm.dateRange.type === 'year'}" ng-click="vm.setDateRange('year')"><h3>YEAR</h3></li>
+        <li class="range-calendar" ng-class="{'range-default': vm.dateRange.type !== 'custom', 'range-active': vm.dateRange.type === 'custom'}">
+            <i ng-click="vm.showCalendar = vm.showCalendar !== true"
+               class="fa fa-calendar fa-2x"
+               uib-datepicker-popup
+               ng-model="vm.customDate"
+               is-open="vm.showCalendar"
+               show-weeks="true"
+               show-button-bar="false"></i>
+        </li>
+    </ul>
+</div>
+<div id="date-range-display" class="row text-center" ng-cloak>
+    <div class="col-md-4">
+        <span class="subtract" ng-click="vm.setDateRange(vm.dateRange.type, 'subtract')"><i class="fa fa-angle-left fa-4x"></i></span>
+        <h3>
+            <span class="animate-if" ng-if="vm.dateRange.type === 'day' || vm.dateRange.type === 'custom'">{{vm.dateRange.min | amDateFormat:'MMM Do, YYYY'}}</span>
+            <span class="animate-if" ng-if="vm.dateRange.type === 'week'">{{vm.dateRange.min | amDateFormat:'MMM Do, YYYY'}} - {{vm.dateRange.max | amDateFormat:'MMM Do, YYYY'}}</span>
+            <span class="animate-if" ng-if="vm.dateRange.type === 'month'">{{vm.dateRange.min | amDateFormat:'MMM'}}</span>
+            <span class="animate-if" ng-if="vm.dateRange.type === 'year'">{{vm.dateRange.min | amDateFormat:'YYYY'}}</span>
+        </h3>
+        <span class="add" ng-click="vm.setDateRange(vm.dateRange.type, 'add')"><i class="fa fa-angle-right fa-4x"></i></span>
+    </div>
+</div>
+<div id="list-option" class="row text-center" ng-cloak>
+    <div class="btn-group btn-group-sm" role="group">
+        <button type="button" class="btn" ng-class="{'btn-default': vm.view !== 'analytics', 'btn-primary': vm.view === 'analytics'}" ng-click="vm.view = 'analytics'"><i class="fa fa-line-chart"></i> <h4>ANALYTICS</h4></button>
+        <button type="button" class="btn" ng-class="{'btn-default': vm.view !== 'list', 'btn-primary': vm.view === 'list'}" ng-click="vm.view = 'list'"><i class="fa fa-list-ul"></i> <h4>LIST</h4></button>
+    </div>
+</div>
+<spinner show="vm.loading"></spinner>
+<br>
+<div ng-if="vm.view === 'list' && vm.reservations.length > 0" id="list-view" class="row" ng-cloak>
+    <div class="col-md-10 export-link">
+        <a href="" class="pull-right" ng-csv="vm.exportArray" filename="reservations.csv" csv-header="vm.exportHeader"> <i class="fa fa-arrow-circle-o-up"></i> Export</a>
+    </div>
+
+    <div class="col-md-10 col-md-offset-2" ng-repeat="(key, group) in vm.groupedReservations track by $index">
+        <div class="list-stop"></div>
+        <div ng-if="vm.dateRange.type === 'day' || vm.dateRange.type === 'custom'" class="list-time col-md-8 col-md-offset-1"><h3>{{key | amDateFormat:'h:mm a' | uppercase}}</h3></div>
+        <div ng-if="vm.dateRange.type === 'week'" class="list-time col-md-8 col-md-offset-1"><h3>{{key | amDateFormat:'MMM Do, YYYY' | uppercase}}</h3></div>
+        <div ng-if="vm.dateRange.type === 'month'" class="list-time col-md-8 col-md-offset-1"><h3>{{key | amDateFormat:'MMM Do, YYYY' | uppercase}}</h3></div>
+        <div ng-if="vm.dateRange.type === 'year'" class="list-time col-md-8 col-md-offset-1"><h3>{{key | amDateFormat:'MMMM' | uppercase}}</h3></div>
+        <div class="panel panel-default col-md-8 col-md-offset-1" ng-repeat="item in group track by $index">
+            <div ng-click="item.fullView = item.fullView !== true" class="clearfix panel-heading">
+                <div class="col-md-2">
+                    <img class="customer-pic" ng-src="{{'data:image/png;base64,'+vm.customerProfilePics[item.customerRef].$value}}">
+                </div>
+
+                <div class="col-md-8 heading-mid">
+                    <div class="col-md-12">
+                        <h4>{{item.customers_firstName | uppercase}} {{item.customers_lastName | uppercase}}</h4>
+                        <h4>{{item.cars_color | uppercase}} {{item.cars_make | uppercase}} {{item.cars_bodyStyle | uppercase}}</h4>
+                        <h4>{{item.cars_licensePlate | uppercase}}</h4>
+                    </div>
+                    <div ng-if="vm.userRole !== 'valet'" class="col-md-6">
+                        <button type="button" class="btn btn-secondary btn-sm">VALIDATE</button>
+                        <button type="button" class="btn btn-secondary btn-sm">REQUEST</button>
+                    </div>
+                    <div ng-if="!item.fullView && vm.userRole === 'admin' || !item.fullView && vm.userRole === 'valet'" class="col-md-6">
+                        <button type="button" class="btn btn-secondary btn-sm">REFUND</button>
+                        <button type="button" class="btn btn-secondary btn-sm">REQUEST</button>
+                    </div>
+                </div>
+
+                <div ng-if="item.reservations_status" class="reservation-status col-md-2">
+                    <h4>{{item.reservations_status | uppercase}}</h4>
+                </div>
+            </div>
+            <div ng-if="item.fullView && vm.userRole === 'admin' || item.fullView && vm.userRole === 'valet'" class="clearfix panel-body" ng-class="{'no-margin-bottom':!item.greetValetRef && !item.returnValetRef}">
+                <div class="location-name location col-md-6">
+                    <span class="circle-small color-circle-orange"></span>
+                    <h4>{{item.locations_name | uppercase}}</h4>
+                </div>
+                <div class="location-address location col-md-6">
+                    <span class="circle-small color-circle-blue">P</span>
+                    <h4>{{item.locations_address | uppercase}}</h4>
+                </div>
+            </div>
+            <div ng-if="item.fullView && vm.userRole === 'admin' || item.fullView && vm.userRole === 'valet'" class="clearfix panel-body no-margin-bottom">
+                <div class="valets">
+                    <div class="greeter col-md-6" ng-if="item.reservations_greetValetRef">
+                        <div class="text-center pull-right">
+                            <img class="customer-pic" ng-src="{{'data:image/png;base64,'+vm.valetProfilePics[item.reservations_greetValetRef].$value}}">
+                            <h4 class="no-margin-bottom">{{vm.valets[item.reservations_greetValetRef].firstName | uppercase}} {{vm.valets[item.reservations_greetValetRef].lastName | uppercase}}</h4>
+                            <h4 class="no-margin-top">GREETER</h4>
+                        </div>
+                    </div>
+                    <div class="returner col-md-6" ng-if="item.reservations_returnValetRef">
+                        <div class="text-center pull-left">
+                            <img class="customer-pic" ng-src="{{'data:image/png;base64,'+vm.valetProfilePics[item.reservations_returnValetRef].$value}}">
+                            <h4 class="no-margin-bottom">{{vm.valets[item.reservations_returnValetRef].firstName | uppercase}} {{vm.valets[item.reservations_returnValetRef].lastName | uppercase}}</h4>
+                            <h4 class="no-margin-top">RETURNER</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="item.fullView && vm.userRole === 'admin' || item.fullView && vm.userRole === 'valet'" class="clearfix panel-footer">
+                <button type="button" class="btn btn-secondary">REFUND THIS CUSTOMER</button>
+                <button type="button" class="btn btn-secondary">REQUEST CAR RETURN</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="row" ng-if="vm.view === 'analytics' && vm.reservations.length > 0" ng-cloak>
+    <div class="panel panel-default col-md-6 col-md-offset-3">
+        <div class="panel-heading">
+            <h3 class="panel-title">Revenue and Parks over time</h3>
+        </div>
+        <div class="panel-body">
+            <chart-rev-parks-over-time date-range="vm.dateRange" reservations="vm.reservations"></chart-rev-parks-over-time>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-if="vm.reservations.length === 0" ng-cloak>
+    <div class="bs-callout bs-callout-neutral col-md-6 col-md-offset-3">
+        <h4>NO RESERVATIONS</h4>
+        <p>Please try a different date and/or filter.</p>
+    </div>
+</div>
+
