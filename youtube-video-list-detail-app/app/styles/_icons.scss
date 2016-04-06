@@ -1,0 +1,130 @@
+.icons{
+  display:inline-block;
+  background: transparent url('/images/sprites.png') center 0 no-repeat;
+
+  &.i-logo{
+    background-position: center -10px;
+    width: 48.635px;
+    height: 49px;
+  }
+
+  &.i-delete{
+    background-position: center -66px;
+    width: 19px;
+    height: 16px;
+  }
+
+  &.i-big-add{
+    background-position: center -205px;
+    width: 61px;
+    height: 65px;
+  }
+
+  &.i-calendar{
+    background-position: center -168px;
+    width: 61px;
+    height: 34px;
+  }
+
+  &.i-left-arrow{
+    background-position: -37px -90px;
+    width: 44px;
+    height: 28px;
+  }
+
+  &.i-right-arrow{
+    background-position: -84px -90px;
+    width: 44px;
+    height: 28px;
+  }
+}
+.circle-small{
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  box-sizing: border-box;
+  padding-top: 5px;
+  padding-left: 2px;
+}
+.color-circle-orange{
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff8b32+0,db3d3d+100 */
+  background: #ff8b32; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ff8b32 0%, #db3d3d 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #ff8b32 0%,#db3d3d 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #ff8b32 0%,#db3d3d 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff8b32', endColorstr='#db3d3d',GradientType=0 ); /* IE6-9 */
+}
+
+.color-circle-blue{
+  background: #3B5998;
+  -webkit-box-shadow: 53px 52px 62px -53px rgba(0,0,0,0.75);
+  -moz-box-shadow: 53px 52px 62px -53px rgba(0,0,0,0.75);
+  box-shadow: 53px 52px 62px -53px rgba(0,0,0,0.75);
+}
+
+/*LOADER*/
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #000000;
+  background: -moz-linear-gradient(left, #000000 10%, rgba(255, 255, 255, 0) 42%);
+  background: -webkit-linear-gradient(left, #000000 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, #000000 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(left, #000000 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, #000000 10%, rgba(255, 255, 255, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #000000;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: #ffffff;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}

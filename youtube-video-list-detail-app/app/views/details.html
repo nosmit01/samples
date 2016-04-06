@@ -1,0 +1,51 @@
+<div class="form-group col-md-1 pull-right" id="go-back">
+    <a href="" class="btn btn-primary" ui-sref="list"><i class="fa fa-arrow-left"></i> Go back</a>
+</div>
+
+<spinner show="vm.loading"></spinner>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="embed-responsive embed-responsive-16by9">
+            <div ng-bind-html="vm.player"></div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Meta Information</h2>
+        <dl class="dl-horizontal col-md-7">
+            <dt>Title</dt>
+            <dd>{{vm.videoDetails.video.snippet.title}}</dd>
+            <dt>Channel</dt>
+            <dd>{{vm.videoDetails.video.snippet.channelTitle}}</dd>
+            <dt>Date</dt>
+            <dd>{{vm.videoDetails.video.snippet.publishedAt | amDateFormat:'MMM Do, YYYY'}}</dd>
+        </dl>
+        <dl class="dl-horizontal col-md-5">
+            <dt>Comments</dt>
+            <dd>{{vm.videoDetails.video.statistics.commentCount}}</dd>
+            <dt>Likes</dt>
+            <dd>{{vm.videoDetails.video.statistics.likeCount}}</dd>
+            <dt>Dislikes</dt>
+            <dd>{{vm.videoDetails.video.statistics.dislikeCount}}</dd>
+            <dt>Views</dt>
+            <dd>{{vm.videoDetails.video.statistics.viewCount}}</dd>
+        </dl>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <h2>Comments</h2>
+        <div class="well well-lg" ng-repeat="item in vm.videoDetails.comments">
+            <div class="col-md-2">
+                <img src="{{item.snippet.topLevelComment.snippet.authorProfileImageUrl}}">
+                <br>{{item.snippet.topLevelComment.snippet.authorDisplayName}}
+            </div>
+            <div class="col-md-8" ng-bind-html="item.snippet.topLevelComment.snippet.textDisplay"></div>
+            <div class="col-md-2" am-time-ago="item.snippet.topLevelComment.snippet.updatedAt"></div>
+            <div class="clearfix visible-xs-block"></div>
+        </div>
+    </div>
+</div>
+

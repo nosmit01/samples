@@ -1,0 +1,62 @@
+@import "bootstrap.min.scss";
+@import "font-awesome.min.scss";
+@import 'vars';
+@import 'typography';
+@import 'icons';
+@import 'fonts';
+@import 'buttons';
+
+#search-tab{
+  form.form-inline{
+    margin:20px 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #my-location{
+    position: relative;
+    left: 65px;
+    top: 3px;
+  }
+
+}
+
+.clearfix{
+  display:block !important;
+  clear:both;
+  margin-bottom: 20px;
+}
+
+#go-back{
+  margin-top:-45px;
+}
+
+table.table{
+  thead{
+    td{
+      font-weight: bold;
+    }
+
+    td.col-date{
+      width: 150px;
+    }
+
+    td.col-action{
+      width: 100px;
+    }
+  }
+  tbody{
+    td.col-action{
+      text-align: center;
+      font-size: 20px;
+      
+      .fa{
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+#spinner{
+  position: fixed;
+  opacity: .5;
+}

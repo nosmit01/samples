@@ -1,0 +1,27 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+      <base href="/">
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title ng-bind="pageTitle"></title>
+      <meta name="description" content="">
+      <meta name="viewport" content="width=device-width">
+      <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body class="ng-cloak">
+
+    <div class="container-fluid"><h1>Banno Test App</h1></div>
+    <div class="container-fluid" ui-view></div>
+
+    <script>
+        function init() {
+            window.initGapi(); // Calls the init function defined on the window
+        }
+    </script>
+    <script src="js/main.js"></script>
+    <script src="https://apis.google.com/js/client.js?onload=init"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+
+  </body>
+</html>

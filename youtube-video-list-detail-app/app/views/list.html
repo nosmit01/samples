@@ -1,0 +1,103 @@
+<!-- Tabs -->
+<ul class="nav nav-tabs">
+    <li role="presentation" ng-class="{active: vm.tab.search}">
+        <a href="#" ng-click="vm.tab.favorites = false; vm.tab.search = true;">Search</a>
+    </li>
+    <li role="presentation" ng-class="{active: vm.tab.favorites}">
+        <a href="#" ng-click="vm.tab.favorites = true; vm.tab.search = false;">Favorites</a>
+    </li>
+</ul>
+
+<!-- Search -->
+<div class="row" ng-if="vm.tab.search">
+    <div class="col-md-12" id="search-tab">
+        <form class="form-inline">
+            <div class="form-group col-md-3">
+                <label for="search_keyword">Keyword:</label>
+                <input type="text" class="form-control" placeholder="ie. Cats" id="search_keyword" ng-model="vm.search.keyword">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="search_location">Location:</label>
+                <input type="text" class="form-control" placeholder="ie. New York" id="search_location"
+                       ng-model="vm.search.location"
+                       ng-disabled="vm.search.useMyLocation">
+                <div id="my-location">
+                    <input type="checkbox"
+                           ng-model="vm.search.useMyLocation"
+                           ng-click="vm.search.useMyLocation !== vm.search.useMyLocation"> Use My Location
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="search_sort">Sort by:</label>
+                <select class="form-control" id="search_sort"
+                        ng-options="item as item.label for item in vm.search.sortItems"
+                        ng-model="vm.search.sort"
+                        ng-init="vm.search.sort = vm.search.sortItems[0]">
+                </select>
+            </div>
+            <div class="form-group col-md-1 pull-right">
+                <button type="button" class="btn btn-primary" ng-click="vm.searchVideos(true)"><i class="fa fa-search"></i> Search</button>
+            </div>
+            <div class="clearfix visible-xs-block"></div>
+        </form>
+
+        <spinner show="vm.loading"></spinner>
+        <table ng-if="vm.videoList.length > 0" class="table table-striped" infinite-scroll="vm.searchVideos(false)" infinite-scroll-distance="3">
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td class="col-date">Date</td>
+                    <td class="col-action"></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in vm.videoList">
+                    <td><a href="" ui-sref="details({id: item.id.videoId})"><img src="{{item.snippet.thumbnails.default.url}}"></a></td>
+                    <td><a href="" ui-sref="details({id: item.id.videoId})">{{item.snippet.title}}</a></td>
+                    <td>{{item.snippet.description}}</td>
+                    <td>{{item.snippet.publishedAt | amDateFormat:'MMM Do, YYYY'}}</td>
+                    <td class="col-action">
+                        <i class="fa"
+                           ng-class="{'fa-heart-o': !item.favorite, 'fa-heart': item.favorite}"
+                           ng-click="item.favorite = item.favorite !== true; vm.toggleFavorites(item)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<!-- Favorites -->
+<div class="row" ng-if="vm.tab.favorites">
+    <table class="table table-striped" ng-if="vm.favorites.length > 0">
+        <thead>
+            <tr>
+                <td></td>
+                <td>Title</td>
+                <td>Description</td>
+                <td class="col-date">Date</td>
+                <td class="col-action"></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in vm.favorites">
+                <td><a href="" ui-sref="details({id: item.id.videoId})"><img src="{{item.snippet.thumbnails.default.url}}"></a></td>
+                <td><a href="" ui-sref="details({id: item.id.videoId})">{{item.snippet.title}}</a></td>
+                <td>{{item.snippet.description}}</td>
+                <td>{{item.snippet.publishedAt | amDateFormat:'MMM Do, YYYY'}}</td>
+                <td class="col-action">
+                    <i class="fa"
+                       ng-class="{'fa-heart-o': !item.favorite, 'fa-heart': item.favorite}"
+                       ng-click="item.favorite = item.favorite !== true; vm.toggleFavorites(item)"></i>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-md-12" ng-if="vm.favorites.length === 0">
+        <h2>No Favorites</h2>
+    </div>
+</div>
+
