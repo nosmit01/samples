@@ -1,10 +1,6 @@
-# John's Pizza Project 
+# React + Redux Sampe Code
 
-In order to view the project:
-
-  - Clone the repo
-  - npm install
-  - npm start
-  - view in browser
-
-There was an issue with CORS and getting the API endpoints locally in my chrome browser. I didn't feel the need to start messing with my browser for a small project, so if you experience the same, then please view in Firefox.
+This is only to view the code and not to render it in the browser. 
+- All endpoints have been removed
+- The name of the company has been changed
+- The theme of the app has been changed
