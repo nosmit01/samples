@@ -7,5 +7,5 @@ Please do the following to run the code:
 
 
 ### In root directory:
-npm install
-yarn dev
+* npm install
+* yarn dev
