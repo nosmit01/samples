@@ -13,3 +13,7 @@ Please do the following to run the code:
 
 ### In root directory, run both the Node server and React app:
 * yarn dev
+* navigate to localhost:3000
+* Login with username: admin, and password: 123
+
+
