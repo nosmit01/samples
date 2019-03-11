@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/storefront/SkillsList.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/storefront</a> SkillsList.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/35</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/11</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/35</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;div class="caf-filter-bar-multiselect mt-3 mb-4 px-2"&gt;
+    &lt;div class="mb-3 font-weight-bold text-caf-red"&gt;
+      &lt;label for="selectAll" class="select-all-btn m-0"&gt;Select All&lt;/label&gt;
+      &lt;input class="invisible" id="selectAll" type="checkbox" v-model="selectAll"&gt;
+    &lt;/div&gt;
+    &lt;ul&gt;
+      &lt;li
+        v-for="skill in skills"
+        :key="skill.id"
+      &gt;
+        &lt;input type="checkbox" :id="skill.id" v-model="selected" :value="skill.id" /&gt;
+        &lt;label :for="skill.id" class="font-weight-semibold label mb-2 mb-md-1"&gt;{{ skill.name }}&lt;/label&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;div class="mb-3 font-weight-bold text-caf-red hidden-lg-up"&gt;
+      &lt;label for="selectAll2" class="select-all-btn"&gt;Select All&lt;/label&gt;
+      &lt;input class="invisible" id="selectAll2" type="checkbox" v-model="selectAll"&gt;
+    &lt;/div&gt;
+    &lt;div class="d-flex justify-content-md-end justify-content-between pb-4"&gt;
+      &lt;button class="btn btn-secondary btn-sm mr-md-1 flex-md-first flex-last" @click="cancel"&gt;Cancel&lt;/button&gt;
+      &lt;button
+        class="btn btn-primary btn-sm mr-1 mr-md-0 width-3"
+        @click="applySelection"&gt;
+        Apply
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import { createNamespacedHelpers } from 'vuex'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >import filter from 'lodash/filter'</span>
+<span class="cstat-no" title="statement not covered" >import includes from 'lodash/includes'</span>
+<span class="cstat-no" title="statement not covered" >import map from 'lodash/map'</span>
+<span class="cstat-no" title="statement not covered" >import each from 'lodash/each'</span>
+<span class="cstat-no" title="statement not covered" >import isArray from 'lodash/isArray'</span>
+<span class="cstat-no" title="statement not covered" >import find from 'lodash/find'</span>
+<span class="cstat-no" title="statement not covered" >import get from 'lodash/get'</span>
+&nbsp;
+const { mapGetters } = createNamespacedHelpers('storefront')
+&nbsp;
+export default {
+  props: {
+    skills: {
+      type: Array,
+      required: true
+    }
+  },
+<span class="fstat-no" title="function not covered" >  data () {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      selected: []
+    }
+  },
+<span class="fstat-no" title="function not covered" >  mounted () {</span>
+<span class="cstat-no" title="statement not covered" >    this.setSelected()</span>
+  },
+  computed: {
+    ...mapGetters(['isListView']),
+    selectAll: {
+<span class="fstat-no" title="function not covered" >      get: function () {</span>
+<span class="cstat-no" title="statement not covered" >        return this.skills ? this.selected.length === this.skills.length : false</span>
+      },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      set: function (value) {</span></span>
+<span class="cstat-no" title="statement not covered" >        this.selected = []</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (value) {</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >          each(this.skills, skill =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >            this.selected.push(skill.id)</span>
+          })
+        }
+      }
+    }
+  },
+  methods: {
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    applySelection () {</span></span>
+<span class="cstat-no" title="statement not covered" >      let query = ''</span>
+<span class="cstat-no" title="statement not covered" >      let skillsNames = []</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      each(this.selected, skillId =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        query += `&amp;skill=${skillId}`</span>
+<span class="cstat-no" title="statement not covered" >        skillsNames.push(get(find(this.skills, {id: skillId}), 'name', ''))</span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (this.isListView) {</span>
+<span class="cstat-no" title="statement not covered" >        query += '&amp;view=list'</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        path: `/?order=name${query}&amp;ns=1`,
+        replace: true
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.$emit('menu-open', false)</span>
+<span class="cstat-no" title="statement not covered" >      this.$tracker.event('Click', 'SF Menu Nav Skills: Apply Filter', 'Storefront Menu', {</span>
+        skills: skillsNames.join(', ')
+      })
+    },
+<span class="fstat-no" title="function not covered" >    cancel () {</span>
+<span class="cstat-no" title="statement not covered" >      this.selected = []</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('menu-open', false)</span>
+    },
+<span class="fstat-no" title="function not covered" >    setSelected () {</span>
+<span class="cstat-no" title="statement not covered" >      let selectedSkills = this.$route.query.skill</span>
+<span class="cstat-no" title="statement not covered" >      if (!selectedSkills) {</span>
+<span class="cstat-no" title="statement not covered" >        return false</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      this.selected = map(</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        filter(this.skills, skill =&gt;</span></span>
+          isArray(selectedSkills)
+<span class="cstat-no" title="statement not covered" >            ? includes(map(selectedSkills, selectedSkill =&gt;</span>
+              parseInt(selectedSkill)), skill.id)
+            : parseInt(selectedSkills) === skill.id
+        ), 'id')
+    }
+  }
+}
+&lt;/script&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 17:20:26 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

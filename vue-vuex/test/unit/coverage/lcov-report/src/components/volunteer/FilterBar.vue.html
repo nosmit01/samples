@@ -1,0 +1,1505 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/volunteer/FilterBar.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/volunteer</a> FilterBar.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/123</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/58</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/123</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;div class="caf-filter-bar-container sticky-top"&gt;
+    &lt;div
+      ref="filterBar"
+      class="container-fluid caf-filter-bar bg-color-white"
+      :class="{'fixed-top': mobileFilterActive &amp;&amp; isMobile}"
+      v-sticky-top="{elTop : 0, scrollTop : isMobile ? 289 : 276, bodyOffset : 50, isMobile, isOpen : mobileFilterActive}"
+    &gt;
+      &lt;div
+        class="container h-100 d-flex align-items-center justify-content-between text-caf-blue font-weight-semibold"
+      &gt;
+        &lt;div class="caf-filter-bar-col"
+             :class="{'hide' : expandSearch}"&gt;
+          &lt;div
+            class="caf-filter-bar-col-item mobile-filter border-left border-right px-2 hidden-lg-up"
+            :class="{'active' : mobileFilterActive}"
+            @click="$tracker.event('Click', 'Live Listings Page: Filter (Mobile)', 'Find a Project Page'); menuOpen('mobile-filter')"
+          &gt;
+            &lt;span class="pr-1"&gt;&lt;font-awesome-icon :icon="faFilter" size="lg" /&gt;&lt;/span&gt; Filter
+          &lt;/div&gt;
+          &lt;filter-bar-filter
+            v-if="!isMobile"
+            v-for="(filter, i) in filters"
+            :key="filter.id"
+            :filter="filter"
+            :class="{'border-left' : i === 0, active : filter.selected}"
+            :showCount="filter.type !== 'length'"
+            :styles="{minWidth: '180px'}"
+            @menu-open="$tracker.event('Click', 'Live Listings Page: ' + filter.type.replace(/^\w/, c =&gt; c.toUpperCase()) + ' Menu', 'Find a Project Page'); menuOpen(filter.type)"
+          /&gt;
+          &lt;div v-if="!isMobile &amp;&amp; !expandSearch" class="font-size-14 text-caf-red d-flex align-items-center pl-2"&gt;
+            &lt;span class="caf-filter-bar-settings font-weight-bold font-main" @click="clearSettings"&gt;Clear&lt;/span&gt;
+            &lt;span v-if="isVolunteer" class="font-weight-normal text-caf-blue px-1"&gt;|&lt;/span&gt;
+            &lt;span v-if="isVolunteer" class="caf-filter-bar-settings font-weight-bold font-main" @click="saveSettings"&gt;Save settings&lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+&nbsp;
+        &lt;div class="caf-filter-bar-col"
+             :class="{'expand' : isMobile &amp;&amp; expandSearch}"
+             :style="{width: expandSearchWidth, right: 0}"
+             v-click-outside="resetSearchForm"
+        &gt;
+          &lt;div class="caf-filter-bar-col-item search border-right w-100"
+               :class="{'active' : expandSearch, 'border-left' : !expandSearch}"
+          &gt;
+            &lt;form @submit.prevent="search(null)" class="w-100"&gt;
+              &lt;input
+                class="search-input vol-search ml-2 pr-2 text-caf-blue"
+                type="text"
+                placeholder="Search all"
+                ref="searchTerm"
+                v-model="searchTerm"
+                @click="$refs.searchTerm.select()"
+                @focus="setExpandSearch"
+              /&gt;
+            &lt;/form&gt;
+            &lt;span
+              v-if="!expandSearch"
+              class="search-icon ml-1 mr-2"
+              @click="setExpandSearch"
+            &gt;
+              &lt;font-awesome-icon :icon="faSearch" flip="horizontal" size="lg" /&gt;
+            &lt;/span&gt;
+            &lt;span
+              v-if="expandSearch"
+              class="search-icon ml-1 mr-2"
+              @click="setCollapseSearch"
+            &gt;
+              &lt;h6 class="mb-0 mr-1 font-size-13 font-weight-semibold text-nowrap text-uppercase letter-spacing-1"&gt;Clear search&lt;/h6&gt;
+              &lt;font-awesome-icon :icon="faTimes" size="lg" /&gt;
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+&nbsp;
+    &lt;app-notification
+      v-if="isSettingsSaved"
+      message="Your cause and skill selections have been saved to your profile. You can also update these in your &lt;a href='/settings/projects/' data-tracking-label='Live Listings Page: Settings Link' data-tracking-category='Find a Project Page'&gt;Settings&lt;/a&gt;."
+      :dismissable="true"
+      level="success"
+      :ignoreVisible="true"
+      @close="resetIsSettingsSaved"
+      v-sticky-top="{elTop : 50, scrollTop : isMobile ? 289 : 276, class : 'fixed-notification-top'}"
+    /&gt;
+&nbsp;
+    &lt;!-- Menu container that holds:
+        - filter menu options on desktop and mobile
+        - filter dropdowns on mobile (filter dropdowns on desktop are in the code above)
+        - filter clear/ save settings on mobile (clear/ save settings on desktop are in the code above)
+        - save settings notification on mobile (save settings notification on desktop is in the code above)
+     --&gt;
+    &lt;filter-drop-menu
+      :isOpen="!isUndefined(filterSelected) || mobileFilterActive"
+      :isMobile="isMobile"
+      :isSearchOpen="expandSearch"
+      :type="get(filterSelected, 'type')"
+      :bg="get(filterSelected, 'menuBg')"
+      @menu-open="menuOpen"
+    &gt;
+      &lt;!-- Clear/ save settings for mobile --&gt;
+      &lt;div v-if="isMobile &amp;&amp; !expandSearch" class="font-size-14 caf-filter-bar-settings-container font-weight-bold text-caf-red d-flex align-items-center pl-2 py-2"&gt;
+        &lt;span class="caf-filter-bar-settings font-weight-bold font-main" @click="clearSettings"&gt;Clear&lt;/span&gt;
+        &lt;span v-if="isVolunteer" class="font-weight-normal text-caf-blue px-1"&gt;|&lt;/span&gt;
+        &lt;span v-if="isVolunteer" class="caf-filter-bar-settings font-weight-bold font-main" @click="saveSettings"&gt;Save settings&lt;/span&gt;
+      &lt;/div&gt;
+&nbsp;
+      &lt;!-- Filter dropdowns for mobile --&gt;
+      &lt;div v-if="isMobile" class="caf-filter-bar-menu-items d-flex align-items-center px-2"&gt;
+        &lt;div
+          v-for="filter in filters"
+          :key="filter.id"
+          class="caf-filter-bar-menu-item mr-3"
+          :class="{'active' : filter.selected, 'disabled' : expandSearch, 'pr-3': filter.type === 'length'}"
+          @click="$tracker.event('Click', 'Live Listings Page: ' + filter.type.replace(/^\w/, c =&gt; c.toUpperCase()) + ' Menu', 'Find a Project Page'); menuOpen(filter.type)"&gt;
+          &lt;div class="d-flex justify-content-between"&gt;
+            &lt;span class="pr-1"&gt;
+              &lt;font-awesome-icon :icon="filter.icon" size="lg" /&gt;
+            &lt;/span&gt;
+            &lt;span&gt;{{filter.label}}&lt;/span&gt;
+            &lt;span
+              v-if="filter.type !== 'length'"
+              class="pl-1"
+            &gt;
+              {{filter.count &gt; 0 ? filter.count : ''}}
+            &lt;/span&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+&nbsp;
+      &lt;!-- filter menu options for desktop and mobile --&gt;
+      &lt;filter-multi-select
+        v-if="get(filterSelected, 'type') === filter.type"
+        v-for="filter in filterMenu"
+        :key="filter.id"
+        :type="filter.type"
+        :items="getOptions(filter.type)"
+        :settings="settings[filter.type] || []"
+        :isMobile="isMobile"
+        @menu-open="menuOpen(filter.type)"
+        @apply-selection="applySelection"
+      /&gt;
+&nbsp;
+      &lt;!-- length filter menu options. This is better than adding a bunch of conditionals--&gt;
+      &lt;filter-length-multi-select
+        v-if="get(filterSelected, 'type') === 'length'"
+        :items="getOptions('length')"
+        :settings="settings.length || []"
+        :isMobile="isMobile"
+        @menu-open="menuOpen('length')"
+        @apply-selection="applySelection"
+      /&gt;
+    &lt;/filter-drop-menu&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import { createNamespacedHelpers } from 'vuex'</span>
+<span class="cstat-no" title="statement not covered" >import FilterBarFilter from '@/components/volunteer/FilterBarFilter'</span>
+<span class="cstat-no" title="statement not covered" >import FilterDropMenu from '@/components/volunteer/FilterDropMenu'</span>
+<span class="cstat-no" title="statement not covered" >import FilterMultiSelect from '@/components/volunteer/FilterMultiSelect'</span>
+<span class="cstat-no" title="statement not covered" >import FilterLengthMultiSelect from '@/components/volunteer/FilterLengthMultiSelect'</span>
+<span class="cstat-no" title="statement not covered" >import FontAwesomeIcon from '@fortawesome/vue-fontawesome'</span>
+<span class="cstat-no" title="statement not covered" >import AppNotification from '@/components/AppNotification'</span>
+<span class="cstat-no" title="statement not covered" >import { faSearch } from '@fortawesome/pro-solid-svg-icons/faSearch'</span>
+<span class="cstat-no" title="statement not covered" >import { faFilter } from '@fortawesome/pro-solid-svg-icons/faFilter'</span>
+<span class="cstat-no" title="statement not covered" >import { faPencilRuler } from '@fortawesome/pro-regular-svg-icons/faPencilRuler'</span>
+<span class="cstat-no" title="statement not covered" >import { faHeart } from '@fortawesome/pro-regular-svg-icons/faHeart'</span>
+<span class="cstat-no" title="statement not covered" >import { faClock } from '@fortawesome/pro-regular-svg-icons/faClock'</span>
+<span class="cstat-no" title="statement not covered" >import { faTimes } from '@fortawesome/pro-regular-svg-icons/faTimes'</span>
+<span class="cstat-no" title="statement not covered" >import { faPencilRuler as faPencilRulerLight } from '@fortawesome/pro-light-svg-icons/faPencilRuler'</span>
+<span class="cstat-no" title="statement not covered" >import { faHeart as faHeartLight } from '@fortawesome/pro-light-svg-icons/faHeart'</span>
+<span class="cstat-no" title="statement not covered" >import filter from 'lodash/filter'</span>
+<span class="cstat-no" title="statement not covered" >import map from 'lodash/map'</span>
+<span class="cstat-no" title="statement not covered" >import assign from 'lodash/assign'</span>
+<span class="cstat-no" title="statement not covered" >import find from 'lodash/find'</span>
+<span class="cstat-no" title="statement not covered" >import get from 'lodash/get'</span>
+<span class="cstat-no" title="statement not covered" >import isUndefined from 'lodash/isUndefined'</span>
+<span class="cstat-no" title="statement not covered" >import each from 'lodash/each'</span>
+<span class="cstat-no" title="statement not covered" >import { stickyTop, clickOutside } from '@/directives'</span>
+<span class="cstat-no" title="statement not covered" >import { stickyTopMx } from '@/mixins'</span>
+&nbsp;
+const { mapGetters, mapActions } = createNamespacedHelpers('volunteer')
+const { mapGetters: mapBreakpointGetters } = createNamespacedHelpers('breakpoints')
+&nbsp;
+export default {
+  components: {
+    FilterBarFilter,
+    FilterDropMenu,
+    FilterMultiSelect,
+    FilterLengthMultiSelect,
+    FontAwesomeIcon,
+    AppNotification
+  },
+<span class="fstat-no" title="function not covered" >  data () {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      find,
+      get,
+      filter,
+      isUndefined,
+      faSearch,
+      faFilter,
+      faTimes,
+      searchTerm: '',
+      order: 'name',
+      expandSearch: null,
+      mobileFilterActive: false,
+      filters: [
+        { type: 'causes', label: 'Causes', open: false, icon: faHeart, menuBg: faHeartLight, count: 0, useCount: true, selected: false },
+        { type: 'skills', label: 'Skills', open: false, icon: faPencilRuler, menuBg: faPencilRulerLight, count: 0, useCount: true, selected: false },
+        { type: 'length', label: 'Length', open: false, icon: faClock, selected: false }
+      ]
+    }
+  },
+  directives: {
+    stickyTop,
+    clickOutside
+  },
+  mixins: [stickyTopMx],
+<span class="fstat-no" title="function not covered" >  mounted () {</span>
+    // anonymous (logged out) users
+<span class="cstat-no" title="statement not covered" >    if (!this.isAuth &amp;&amp; !this.$route.query.hasOwnProperty('page')) {</span>
+<span class="cstat-no" title="statement not covered" >      const query = {'page': 1}</span>
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: 'volunteer:projects',
+        replace: true,
+        query
+      })
+    }
+    // pass a boolean to ignore grabbing the settings
+    // ie. deep-linked URL with querystrings
+<span class="cstat-no" title="statement not covered" >    if (this.$route.query.hasOwnProperty('init')) { return }</span>
+<span class="cstat-no" title="statement not covered" >    !this.$route.query.hasOwnProperty('page') &amp;&amp; this.fetchSettings()</span>
+  },
+  computed: {
+<span class="fstat-no" title="function not covered" >    hasSearched () {</span>
+<span class="cstat-no" title="statement not covered" >      return !!this.$store.getters['volunteer/searchTerm']</span>
+    },
+<span class="fstat-no" title="function not covered" >    filterSelected () {</span>
+<span class="cstat-no" title="statement not covered" >      return find(this.filters, 'selected')</span>
+    },
+<span class="fstat-no" title="function not covered" >    filterMenu () {</span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      return filter(this.filters, item =&gt; item.type !== 'length')</span></span>
+    },
+<span class="fstat-no" title="function not covered" >    expandSearchWidth () {</span>
+<span class="cstat-no" title="statement not covered" >      let width = 'auto'</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (this.expandSearch) {</span>
+<span class="cstat-no" title="statement not covered" >        width = '100%'</span>
+      } else {
+<span class="cstat-no" title="statement not covered" >        if (this.isMobile) {</span>
+<span class="cstat-no" title="statement not covered" >          width = 'auto'</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >          width = '200px'</span>
+        }
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return width</span>
+    },
+    ...mapGetters([
+      'isAuth',
+      'settings',
+      'causes',
+      'skills',
+      'length',
+      'isSettingsSaved',
+      'projects',
+      'isVolunteer'
+    ]),
+    ...mapBreakpointGetters(['isDesktop', 'isMobile'])
+  },
+  watch: {
+    $route: {
+      handler: 'updateSearchAndSettings',
+      immediate: true
+    },
+<span class="fstat-no" title="function not covered" >    settings (n) {</span>
+<span class="cstat-no" title="statement not covered" >      this.setSelectedCount()</span>
+&nbsp;
+      // update the URL based on returned settings
+<span class="cstat-no" title="statement not covered" >      const query = {</span>
+        'name_filter': '',
+        'skill_filter': n['skills'],
+        'cause_filter': n['causes'],
+        'type_filter': n['length'],
+        'page': 1
+      }
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: 'volunteer:projects',
+        replace: true,
+        query
+      })
+    }
+  },
+  methods: {
+<span class="fstat-no" title="function not covered" >    getOptions (type) {</span>
+<span class="cstat-no" title="statement not covered" >      return this[type]</span>
+    },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    setSelectedCount () {</span></span>
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      this.filters = map(this.filters, filter =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        return assign({}, filter, {</span>
+          count: get(this, `settings[${filter.type}]`, []).length
+        })
+      })
+    },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    updateSearchAndSettings () {</span></span>
+      const { name_filter, cause_filter, skill_filter, type_filter } = this.$route.query || {}
+<span class="cstat-no" title="statement not covered" >      this.searchTerm = name_filter || ''</span>
+<span class="cstat-no" title="statement not covered" >      this.expandSearch = !!this.searchTerm</span>
+<span class="cstat-no" title="statement not covered" >      this.updateSearchTerm(this.searchTerm)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      let causes = cause_filter || []</span>
+<span class="cstat-no" title="statement not covered" >      let skills = skill_filter || []</span>
+<span class="cstat-no" title="statement not covered" >      let length = type_filter || [1, 2]</span>
+<span class="cstat-no" title="statement not covered" >      this.settings.causes = (typeof causes === 'string') ? [causes] : causes</span>
+<span class="cstat-no" title="statement not covered" >      this.settings.skills = (typeof skills === 'string') ? [skills] : skills</span>
+<span class="cstat-no" title="statement not covered" >      this.settings.length = (typeof length === 'string') ? [length] : length</span>
+<span class="cstat-no" title="statement not covered" >      this.updateSettings(this.settings)</span>
+<span class="cstat-no" title="statement not covered" >      this.setSelectedCount()</span>
+    },
+<span class="fstat-no" title="function not covered" >    search () {</span>
+<span class="cstat-no" title="statement not covered" >      this.$tracker.event('Submit', 'Live Listings Page: Search', 'Find a Project Page')</span>
+<span class="cstat-no" title="statement not covered" >      if (this.isMobile) {</span>
+<span class="cstat-no" title="statement not covered" >        this.mobileFilterActive = false</span>
+<span class="cstat-no" title="statement not covered" >        this.menuOpen(false)</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.updateSearchTerm(this.searchTerm)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      const query = {'name_filter': this.searchTerm, 'page': 1}</span>
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: 'volunteer:projects',
+        replace: true,
+        query
+      })
+    },
+<span class="fstat-no" title="function not covered" >    setExpandSearch () {</span>
+<span class="cstat-no" title="statement not covered" >      this.$tracker.event('Click', 'Live Listings Page: Search', 'Find a Project Page')</span>
+<span class="cstat-no" title="statement not covered" >      this.expandSearch = true</span>
+<span class="cstat-no" title="statement not covered" >      this.$refs.searchTerm.focus()</span>
+<span class="cstat-no" title="statement not covered" >      document.dispatchEvent(new Event('input:focus'))</span>
+    },
+<span class="fstat-no" title="function not covered" >    setCollapseSearch () {</span>
+<span class="cstat-no" title="statement not covered" >      this.$tracker.event('Click', 'Live Listings Page: Clear Search', 'Find a Project Page')</span>
+<span class="cstat-no" title="statement not covered" >      this.expandSearch = false</span>
+<span class="cstat-no" title="statement not covered" >      this.searchTerm = ''</span>
+<span class="cstat-no" title="statement not covered" >      if (this.hasSearched) {</span>
+<span class="cstat-no" title="statement not covered" >        this.updateSearchTerm(this.searchTerm)</span>
+<span class="cstat-no" title="statement not covered" >        this.clearSettings(true)</span>
+<span class="cstat-no" title="statement not covered" >        if (!this.isAuth) {</span>
+<span class="cstat-no" title="statement not covered" >          const query = {}</span>
+<span class="cstat-no" title="statement not covered" >          this.$router.push({</span>
+            name: 'volunteer:projects',
+            replace: true,
+            query
+          })
+<span class="cstat-no" title="statement not covered" >          this.$emit('fetch-projects')</span>
+        }
+<span class="cstat-no" title="statement not covered" >        !!this.isAuth &amp;&amp; this.fetchSettings()</span>
+      }
+    },
+<span class="fstat-no" title="function not covered" >    resetSearchForm () {</span>
+<span class="cstat-no" title="statement not covered" >      if (!this.isMobile) {</span>
+<span class="cstat-no" title="statement not covered" >        this.expandSearch = false</span>
+<span class="cstat-no" title="statement not covered" >        this.searchTerm = ''</span>
+      }
+    },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    menuOpen (type) {</span></span>
+<span class="cstat-no" title="statement not covered" >      this.resetIsSettingsSaved() // hide the app notification if visible</span>
+<span class="cstat-no" title="statement not covered" >      if (type === 'mobile-filter') { // user clicked `Filter` button on mobile</span>
+<span class="cstat-no" title="statement not covered" >        this.mobileFilterActive = !this.mobileFilterActive</span>
+        // select first filter, and set others to false
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        this.filters = map(this.filters, (filter, i) =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (i === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return assign({}, filter, {</span>
+              selected: this.mobileFilterActive
+            })
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return assign({}, filter, {</span>
+            selected: false
+          })
+        })
+      } else { // user selected a filter
+<span class="cstat-no" title="statement not covered" >        this.mobileFilterActive = !!type</span>
+        // toggle selected filter and set others to false
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        this.filters = map(this.filters, filter =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >          if (filter.type === type) {</span>
+<span class="cstat-no" title="statement not covered" >            return assign({}, filter, {</span>
+              selected: this.isMobile ? true : !filter.selected
+            })
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          return assign({}, filter, {</span>
+            selected: false
+          })
+        })
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.stickyTopMx({</span>
+        el: this.$refs.filterBar,
+        elTop: 0,
+        scrollTop: 276,
+        stickyClass: 'fixed-top',
+        isMobile: this.isMobile &amp;&amp; (this.mobileFilterActive),
+        mobileClass: 'fixed-top',
+        bodyOffset: 50,
+        hasBodyScroll: true,
+        isOpen: this.mobileFilterActive
+      })
+    },
+<span class="fstat-no" title="function not covered" >    applySelection (type, selections) {</span>
+<span class="cstat-no" title="statement not covered" >      this.settings[type] = selections</span>
+<span class="cstat-no" title="statement not covered" >      this.updateSettings(this.settings)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >      this.filters = map(this.filters, filter =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >        if (filter.type === type) {</span>
+<span class="cstat-no" title="statement not covered" >          return assign({}, filter, {</span>
+            count: selections.length
+          })
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return filter</span>
+      })
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      const query = {</span>
+        name_filter: '',
+        skill_filter: this.settings['skills'],
+        cause_filter: this.settings['causes'],
+        type_filter: this.settings['length'],
+        page: 1
+      }
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: 'volunteer:projects',
+        replace: true,
+        query
+      })
+    },
+<span class="fstat-no" title="function not covered" >    saveSettings () {</span>
+<span class="cstat-no" title="statement not covered" >      this.$tracker.event('Click', 'Live Listings Page: Save Settings', 'Find a Project Page')</span>
+<span class="cstat-no" title="statement not covered" >      this.mobileFilterActive = false</span>
+<span class="cstat-no" title="statement not covered" >      this.menuOpen(false)</span>
+      // called it storeSaveSettings to differentiate from saveSettings used in the template
+<span class="cstat-no" title="statement not covered" >      this.storeSaveSettings(this.settings)</span>
+    },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    clearSettings (ignoreFetch) {</span></span>
+<span class="cstat-no" title="statement not covered" >      if (!this.expandSearch) {</span>
+<span class="cstat-no" title="statement not covered" >        this.$tracker.event('Click', 'Live Listings Page: Clear Filters', 'Find a Project Page')</span>
+        // clear settings
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        each(this.filters, filter =&gt; {</span></span>
+<span class="cstat-no" title="statement not covered" >          this.settings[filter.type] = []</span>
+        })
+&nbsp;
+        // clear counts
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >        this.filters = map(this.filters, filter =&gt; assign({}, filter, { count: 0 }))</span></span>
+&nbsp;
+        // clear search term
+<span class="cstat-no" title="statement not covered" >        this.searchTerm = ''</span>
+<span class="cstat-no" title="statement not covered" >        this.updateSearchTerm(this.searchTerm)</span>
+&nbsp;
+        // update states
+<span class="cstat-no" title="statement not covered" >        this.updateSettings(this.settings)</span>
+        // click event
+<span class="cstat-no" title="statement not covered" >        if (typeof ignoreFetch === 'object') {</span>
+<span class="cstat-no" title="statement not covered" >          this.$emit('fetch-projects', { init: 1, page: 1 })</span>
+<span class="cstat-no" title="statement not covered" >          return</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        !ignoreFetch &amp;&amp; this.$emit('fetch-projects')</span>
+      }
+    },
+    ...mapActions([
+      'fetchSettings',
+      'updateSettings',
+      'storeSaveSettings',
+      'resetIsSettingsSaved',
+      'updateSearchTerm'
+    ])
+  }
+}
+&lt;/script&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 17:20:26 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

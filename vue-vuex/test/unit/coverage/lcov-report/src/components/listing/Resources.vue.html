@@ -1,0 +1,1031 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/listing/Resources.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/listing</a> Resources.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>42/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">96.3% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>26/27</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>14/14</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>42/42</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">52x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">52x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;workflow-step
+    :step="step"
+    :valid="valid"
+    @back="handleBack"
+    @next="handleNext"
+    @exit="handleExit"
+    &gt;
+    &lt;h5 class="h3-md font-weight-semibold mb-3"&gt;Resources&lt;/h5&gt;
+&nbsp;
+    &lt;div class="row no-gutters align-items-center mb-3"&gt;
+      &lt;div class="col-11 col-md-12"&gt;
+        &lt;h6 class="h5-md font-weight-semibold m-0 pr-1 pr-md-0"&gt;Review what you'll need to have prepared before starting the project.&lt;/h6&gt;
+      &lt;/div&gt;&lt;!-- col --&gt;
+      &lt;div class="col-1 hidden-md-up text-right"&gt;
+        &lt;a class="" href="#" @click="$refs.mobileInfo.show()"&gt;
+          &lt;img :src="icoTip"&gt;
+        &lt;/a&gt;
+      &lt;/div&gt;&lt;!-- col --&gt;
+    &lt;/div&gt;&lt;!-- row --&gt;
+&nbsp;
+    &lt;div class="list-checks-container" v-if="projectType &amp;&amp; projectType.org_prereqs" v-html="markdown(projectType.org_prereqs)"&gt;&lt;/div&gt;
+&nbsp;
+    &lt;h6 class="h5-md font-weight-semibold mt-md-5" ref="resources"&gt;Describe the resources you can provide to help the volunteer get started.&lt;/h6&gt;
+&nbsp;
+    &lt;div class="listing-workflow-navtabs-container mt-2 mb-3"&gt;
+      &lt;ul class="nav nav-tabs listing-workflow-navtabs"&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a
+            class="flex-sm-fill flex-sm-center nav-link"
+            :class="{active: isTemplate}"
+            @click="changeEditMode(true)"
+            ref="templateTab"
+            &gt;Fill in the Blank&lt;/a&gt;
+        &lt;/li&gt;
+        &lt;li class="nav-item"&gt;
+          &lt;a
+            class="flex-sm-fill flex-sm-center nav-link"
+            :class="{active: !isTemplate}"
+            @click="changeEditMode(false)"
+            ref="freeformTab"
+            &gt;Write Your Own&lt;/a&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;&lt;!-- nav --&gt;
+&nbsp;
+      &lt;div class="tab-content bg-color-concrete p-2"&gt;
+        &lt;div class="tab-pane" :class="{'show active': isTemplate}"&gt;
+          &lt;div class="listing-workflow-navtabs-container-content rounded p-2 mb-2"&gt;
+            We currently have
+            &lt;label class="input-inline-label input-inline-existing_resources d-block d-md-inline-block ml-md-1 mb-2 mb-md-0"&gt;
+              &lt;span&gt;,&lt;/span&gt;
+              &lt;input
+                class="no-border"
+                type="text"
+                ref="existingResourcesInput"
+                :disabled="submitting"
+                :maxlength="maxExistingResources"
+                style="display: block; width: 100%;"
+                v-show="existingResourcesMode === 'input'"
+                v-model.trim="formData.existing_resources"
+                @blur="existingResourcesFocused=false"
+                @input="existingResourcesFocused=true"
+                &gt;
+                &lt;div
+                class="input-inline-replacer"
+                ref="existingResourcesText"
+                v-show="existingResourcesMode === 'text'"
+                @click="existingResourcesFocused=true"
+                &gt;{{ formData.existing_resources }}&lt;/div&gt;
+              &lt;small class="text-muted"&gt;
+                &lt;max-counter
+                  class="text-caf-success-standard"
+                  :max-length="maxExistingResources"
+                  :value="formData.existing_resources"
+                &gt;&lt;/max-counter&gt;
+              &lt;/small&gt;
+            &lt;/label&gt;
+            which should make it easy for you to get started.
+          &lt;/div&gt;&lt;!-- listing-workflow-navtabs-container-content --&gt;
+&nbsp;
+          &lt;div class="listing-workflow-navtabs-container-content rounded p-2"&gt;
+            We also have
+            &lt;label class="input-inline-label input-inline-additional_resources d-block d-md-inline-block ml-md-1 mb-2 mb-md-0"&gt;
+              &lt;span&gt;,&lt;/span&gt;
+              &lt;input
+                class="no-border"
+                type="text"
+                ref="additionalResourcesInput"
+                :disabled="submitting"
+                :maxlength="maxAdditionalResources"
+                style="display: block; width: 100%;"
+                v-show="additionalResourcesMode === 'input'"
+                v-model.trim="formData.additional_resources"
+                @blur="additionalResourcesFocused=false"
+                @input="additionalResourcesFocused=true"
+                &gt;
+                &lt;div
+                class="input-inline-replacer"
+                ref="additionalResourcesText"
+                v-show="additionalResourcesMode === 'text'"
+                @click="additionalResourcesFocused=true"
+                &gt;{{ formData.additional_resources }}&lt;/div&gt;
+&nbsp;
+              &lt;small class="text-muted"&gt;
+                &lt;max-counter
+                  class="text-caf-success-standard"
+                  :max-length="maxAdditionalResources"
+                  :value="formData.additional_resources"
+                &gt;&lt;/max-counter&gt;
+              &lt;/small&gt;
+           &lt;/label&gt;
+            and the ability to provide any other information you need.
+          &lt;/div&gt;&lt;!-- listing-workflow-navtabs-container-content --&gt;
+&nbsp;
+        &lt;/div&gt;
+        &lt;div class="tab-pane" :class="{'show active': !isTemplate}"&gt;
+          &lt;form-group&gt;
+            &lt;form-textarea
+            rows="9"
+            :disabled="submitting"
+            v-model.trim="formData.resources"
+            :value="formData.resources"
+            :maxlength="maxResources"
+            &gt;
+            &lt;/form-textarea&gt;
+            &lt;template slot="hint"&gt;
+              &lt;small class="text-muted d-flex"&gt;
+                &lt;max-counter
+                  class="ml-auto pr-2 text-caf-success-standard"
+                  :max-length="maxResources"
+                  :value="formData.resources"
+                &gt;&lt;/max-counter&gt;
+              &lt;/small&gt;
+            &lt;/template&gt;
+          &lt;/form-group&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;&lt;!-- tab-content --&gt;
+    &lt;/div&gt;&lt;!-- listing-workflow-navtabs-container --&gt;
+&nbsp;
+    &lt;template slot="sidebar"&gt;
+      &lt;sidebar-card
+        :style="sidebarCardStyle"
+        :icon="icoTip"
+        @show-example="trackShowExample"
+        &gt;
+        {{ resourcesInfo }}
+        &lt;template slot="example"&gt;{{ resourcesExample }}&lt;/template&gt;
+      &lt;/sidebar-card&gt;
+    &lt;/template&gt;
+&nbsp;
+    &lt;mobile-info-dialog ref="mobileInfo" @show="trackShowMobileInfo" :icon="icoTip"&gt;
+      {{ resourcesInfo }}
+      &lt;template slot="example"&gt;{{ resourcesExample }}&lt;/template&gt;
+    &lt;/mobile-info-dialog&gt;
+&nbsp;
+  &lt;/workflow-step&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+import { createNamespacedHelpers } from 'vuex'
+&nbsp;
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import FormGroup from '@/components/forms/FormGroup'
+import FormInput from '@/components/forms/FormInput'
+import FormTextarea from '@/components/forms/FormTextarea'
+import SidebarCard from '@/components/listing/SidebarCard'
+import WorkflowStep from '@/components/listing/WorkflowStep'
+import MobileInfoDialog from '@/components/listing/MobileInfoDialog'
+import MaxCounter from '@/components/listing/MaxCounter'
+&nbsp;
+import faChevronDown from '@fortawesome/fontawesome-free-solid/faChevronDown'
+import faChevronUp from '@fortawesome/fontawesome-free-solid/faChevronUp'
+&nbsp;
+import icoTip from '__STATIC__/images/responsive/icons/ico_tip_yellow.svg'
+&nbsp;
+import workflowStepMixin from '@/mixins/listing/workflowStepMixin'
+&nbsp;
+import { markdown } from '@/filters'
+&nbsp;
+const { mapGetters, mapActions } = createNamespacedHelpers('listing')
+&nbsp;
+export default {
+  mixins: [workflowStepMixin],
+  components: {
+    FontAwesomeIcon,
+    FormInput,
+    FormTextarea,
+    FormGroup,
+    MaxCounter,
+    SidebarCard,
+    WorkflowStep,
+    MobileInfoDialog
+  },
+  data () {
+    return {
+      faChevronUp,
+      faChevronDown,
+      icoTip,
+      isTemplate: true,
+      additionalResourcesFocused: false,
+      existingResourcesFocused: false,
+      maxResources: 500,
+      maxExistingResources: 60,
+      maxAdditionalResources: 60,
+      sidebarCardStyle: {},
+      resourcesInfo: `
+      Identifying the resources you will provide shows volunteers that you are committed
+      to the success of this project.`,
+      resourcesExample: `
+      We currently have a report with our metrics from last year, which should make it
+      easy for you to get started. We also have raw data for this year, and the ability
+      to provide any other information you need.`
+    }
+  },
+  mounted () {
+    this.isTemplate = !this.formData.resources
+    this.sidebarCardStyle = {
+      position: 'absolute',
+      top: `${this.$refs.resources.offsetTop}px`
+    }
+  },
+  methods: {
+    markdown,
+    confirmChangeEditMode () {
+      return this.$confirm.show({
+        title: 'Are you sure you want to change your format?',
+        message: 'Any text that you entered will be lost',
+        buttons: {
+          confirm: 'Yes, Proceed',
+          cancel: 'No, Cancel'
+        }
+      })
+    },
+    async changeEditMode (isTemplate) {
+      // at this point launch modal if isChanged
+      if (isTemplate) {
+        if (this.formData.resources) {
+          const confirmed = await this.confirmChangeEditMode()
+          if (!confirmed) {
+            return
+          }
+        }
+        this.formData.resources = ''
+      } else {
+        if (this.formData.additional_resources || this.formData.existing_resources) {
+          const confirmed = await this.confirmChangeEditMode()
+          if (!confirmed) {
+            return
+          }
+        }
+        this.formData.additional_resources = ''
+        this.formData.existing_resources = ''
+      }
+      this.isTemplate = isTemplate
+    },
+    async save (onSuccess, required) {
+      if (!this.isChanged) {
+        return onSuccess()
+      }
+      const success = await this.saveProjectResources({ required })
+<span class="missing-if-branch" title="else path not taken" >E</span>      if (success) {
+        onSuccess()
+      }
+    },
+    handleBack () {
+      this.save(() =&gt; {
+        this.$router.push({
+          name: 'listing:deliverables',
+          params: this.$route.params
+        })
+      })
+    },
+    handleNext () {
+      this.save(() =&gt; {
+        this.$router.push({
+          name: 'listing:impact',
+          params: this.$route.params
+        })
+      }, true)
+    },
+    handleExit () {
+      this.save(() =&gt; {
+        this.trackExit()
+        this.redirectToDashboard()
+      })
+    },
+    ...mapActions(['saveProjectResources'])
+  },
+  computed: {
+    valid () {
+      return !!this.formData.resources || (!!this.formData.additional_resources &amp;&amp; !!this.formData.existing_resources)
+    },
+    additionalResourcesMode () {
+      return this.formData.additional_resources.length &gt; 0 &amp;&amp; !this.additionalResourcesFocused ? 'text' : 'input'
+    },
+    existingResourcesMode () {
+      return this.formData.existing_resources.length &gt; 0 &amp;&amp; !this.existingResourcesFocused ? 'text' : 'input'
+    },
+    ...mapGetters([
+      'formData',
+      'submitting',
+      'project',
+      'projectType'
+    ])
+  }
+}
+&lt;/script&gt;
+&nbsp;
+&lt;style&gt;
+input.no-border {
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  display: block;
+  font-family: inherit;
+  font-weight: 600;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+&lt;/style&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 17:20:26 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/listing/LiveProjectCard.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/listing</a> LiveProjectCard.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>6/6</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>1/1</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>6/6</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;div class="caf-card-project card-listing project"&gt;
+    &lt;div class="caf-card-project-container"&gt;
+      &lt;div class="caf-card-project-header mb-0"
+           :style="`background-image: url('${images.cover_image}')`"
+           &gt;
+      &lt;/div&gt;
+        &lt;div class="caf-card-project-body p-3 pt-4"&gt;
+          &lt;div class="category-tag"&gt;
+            Project&lt;span class="px-1"&gt;|&lt;/span&gt;{{ projectType.timeframe }}
+          &lt;/div&gt;&lt;!-- category-tag --&gt;
+&nbsp;
+          &lt;div class="caf-card-project-body-listingcontainer"&gt;
+            &lt;div class="caf-card-project-body-title d-flex align-items-center text-left"&gt;
+              &lt;h4 class="font-weight-semibold my-0"&gt;{{ projectType.name }}&lt;/h4&gt;
+            &lt;/div&gt;&lt;!-- caf-card-project-body-title --&gt;
+&nbsp;
+            &lt;div class="caf-card-project-body-org pt-1 text-left text-color-gray"&gt;
+              &lt;em class="font-weight-normal text-black"&gt;for&lt;/em&gt;
+              {{ nonprofit.name|truncate(52) }}
+            &lt;/div&gt;&lt;!-- caf-card-project-body-org --&gt;
+&nbsp;
+          &lt;/div&gt;&lt;!-- caf-card-project-listingcontainer --&gt;
+&nbsp;
+          &lt;div class="caf-card-project-body-connection d-flex justify-content-between align-items-center text-left"&gt;
+            &lt;span&gt;Share your skills with {{ profile.first_name_and_initial }}.&lt;/span&gt;
+            &lt;img v-if="images.image" class="rounded-circle" :src="images.image" :alt="profile.first_name_and_initial" width="30" height="30"&gt;
+          &lt;/div&gt;&lt;!-- caf-card-project-body-connection --&gt;
+&nbsp;
+          &lt;div class="caf-card-project-body-impactstatement d-flex align-items-center text-color-gray text-left"&gt;
+            &lt;img :src="quoteOpen" alt="Impact Statement"&gt;
+            This project will save us ${{ projectType.savings|formatInteger }}, allowing us to {{ formData.impact_statement|truncate(140) }}
+          &lt;/div&gt;&lt;!-- caf-card-project-body-impactstatement --&gt;
+          &lt;div class="caf-card-project-body-cause d-flex align-items-center text-color-gray text-uppercase"&gt;
+            {{ nonprofit.primary_cause|truncate(36) }}
+          &lt;/div&gt;&lt;!-- caf-card-project-body-cause --&gt;
+        &lt;/div&gt;&lt;!-- caf-card-project-body --&gt;
+    &lt;/div&gt;&lt;!-- caf-card-project-container --&gt;
+  &lt;/div&gt;&lt;!-- caf-card-project --&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+import { createNamespacedHelpers } from 'vuex'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import faPencil from '@fortawesome/fontawesome-free-solid/faPencilAlt'
+&nbsp;
+import { formatInteger, truncate } from '@/filters'
+import quoteOpen from '__STATIC__/images/responsive/icons/ico_quote_open.svg'
+&nbsp;
+const { mapGetters } = createNamespacedHelpers('listing')
+&nbsp;
+export default {
+  components: {
+    FontAwesomeIcon
+  },
+  filters: {
+    formatInteger,
+    truncate
+  },
+  data () {
+    return {
+      faPencil,
+      quoteOpen
+    }
+  },
+  computed: {
+    ...mapGetters([
+      'nonprofit',
+      'profile',
+      'project',
+      'projectType',
+      'images',
+      'formData'
+    ])
+  }
+}
+&lt;/script&gt;
+&nbsp;
+&lt;style scoped&gt;
+.caf-card-project {
+  pointer-events: auto !important;
+}
+&lt;/style&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 17:20:26 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

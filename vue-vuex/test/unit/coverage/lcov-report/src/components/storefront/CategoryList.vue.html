@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/components/storefront/CategoryList.vue</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">All files</a> / <a href="index.html">src/components/storefront</a> CategoryList.vue
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>0/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/10</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>0/42</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">&lt;template&gt;
+  &lt;ul class="caf-filter-bar-dropdown"&gt;
+    &lt;li
+      class="px-2 category"
+      @click="resetSearch"
+      :class="{'active': !selectedCategory &amp;&amp; !wishlistActive &amp;&amp; !searchTerm}"
+    &gt;
+      &lt;span class="label"&gt;All Projects&lt;/span&gt;
+      &lt;span class="count" v-if="totalNumProjects"&gt;{{ totalNumProjects }}&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li
+      class="px-2 category"
+      v-for="category in categories"
+      :key="category.id"
+      :value="category.id"
+      :class="{'active': category.id === selectedCategory}"
+      @click="browseCategory(category.id, category.name)"
+    &gt;
+      &lt;span class="label"&gt;{{ category.name }}&lt;/span&gt;
+      &lt;span class="count"&gt;{{ category.num_projects }}&lt;/span&gt;
+    &lt;/li&gt;
+    &lt;li
+      class="px-2 category"
+      @click="postCall"
+    &gt;
+      &lt;span class="label"&gt;Post a Call&lt;/span&gt;
+      &lt;span class="count"&gt;&lt;span class="ico-call"&gt;&lt;/span&gt;&lt;/span&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/template&gt;
+&nbsp;
+&lt;script&gt;
+<span class="cstat-no" title="statement not covered" >import { createNamespacedHelpers } from 'vuex'</span>
+&nbsp;
+const { mapGetters } = createNamespacedHelpers('storefront')
+const { mapGetters: mapBreakpointGetters } = createNamespacedHelpers('breakpoints')
+&nbsp;
+export default {
+  props: {
+    totalNumProjects: {
+      type: Number,
+      required: true
+    },
+    categories: {
+      type: Array,
+      required: true
+    },
+    isWishlist: {
+      type: Boolean,
+<span class="fstat-no" title="function not covered" >      default () {</span>
+<span class="cstat-no" title="statement not covered" >        return false</span>
+      }
+    }
+  },
+<span class="fstat-no" title="function not covered" >  data () {</span>
+<span class="cstat-no" title="statement not covered" >    return {</span>
+      searchTerm: '',
+      expandSearch: null,
+      searchActive: false,
+      showMobileFilters: false,
+      wishlistActive: this.isWishlist
+    }
+  },
+  computed: {
+<span class="fstat-no" title="function not covered" >    selectedCategory () {</span>
+<span class="cstat-no" title="statement not covered" >      const category = parseInt(this.$route.query.category)</span>
+<span class="cstat-no" title="statement not covered" >      return category || null</span>
+    },
+    ...mapGetters(['isListView']),
+    ...mapBreakpointGetters(['isDesktop', 'isMobile'])
+  },
+  watch: {
+    $route: {
+      handler: 'updateSearch',
+      immediate: true
+    }
+  },
+  methods: {
+<span class="fstat-no" title="function not covered" >    trackMenuClick (label) {</span>
+<span class="cstat-no" title="statement not covered" >      this.$tracker.event('Click', label, 'Storefront Menu')</span>
+    },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    updateSearch () {</span></span>
+      const { q } = this.$route.query || {}
+<span class="cstat-no" title="statement not covered" >      this.searchTerm = q || ''</span>
+<span class="cstat-no" title="statement not covered" >      this.searchActive = this.searchTerm !== ''</span>
+<span class="cstat-no" title="statement not covered" >      this.expandSearch = this.searchTerm !== ''</span>
+    },
+<span class="fstat-no" title="function not covered" >    browseCategory (categoryId, name) {</span>
+<span class="cstat-no" title="statement not covered" >      this.searchTerm = ''</span>
+<span class="cstat-no" title="statement not covered" >      this.searchActive = false</span>
+<span class="cstat-no" title="statement not covered" >      this.expandSearch = false</span>
+<span class="cstat-no" title="statement not covered" >      if (this.isMobile) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showMobileFilters = false</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.trackMenuClick(`SF Menu Nav Type: ${name} ${categoryId}`)</span>
+<span class="cstat-no" title="statement not covered" >      this.search(categoryId)</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('menu-open', false)</span>
+    },
+<span class="fstat-no" title="function not covered" >    browseNewProjects () {</span>
+<span class="cstat-no" title="statement not covered" >      this.trackMenuClick('SF Menu Nav Type: New Projects')</span>
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: 'storefront:new',
+        replace: true
+      })
+<span class="cstat-no" title="statement not covered" >      this.$emit('menu-open', false)</span>
+    },
+<span class="fstat-no" title="function not covered" >    search (categoryId) {</span>
+<span class="cstat-no" title="statement not covered" >      if (this.searchTerm) {</span>
+<span class="cstat-no" title="statement not covered" >        this.searchActive = true</span>
+<span class="cstat-no" title="statement not covered" >        this.expandSearch = true</span>
+      }
+<span class="cstat-no" title="statement not covered" >      const query = {ns: 1, order: 'name', view: this.isListView ? 'list' : undefined}</span>
+<span class="cstat-no" title="statement not covered" >      if (categoryId) {</span>
+<span class="cstat-no" title="statement not covered" >        query.category = categoryId</span>
+<span class="cstat-no" title="statement not covered" >      } else if (this.searchTerm) {</span>
+<span class="cstat-no" title="statement not covered" >        query.q = this.searchTerm</span>
+<span class="cstat-no" title="statement not covered" >        this.$tracker.event('Submit', 'SF Menu Nav Search', 'Storefront Menu')</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      this.$router.push({</span>
+        name: 'storefront:projects',
+        replace: true,
+        query
+      })
+    },
+<span class="fstat-no" title="function not covered" >    resetSearch () {</span>
+<span class="cstat-no" title="statement not covered" >      this.searchTerm = ''</span>
+<span class="cstat-no" title="statement not covered" >      this.searchActive = false</span>
+<span class="cstat-no" title="statement not covered" >      this.wishlistActive = false</span>
+<span class="cstat-no" title="statement not covered" >      this.expandSearch = false</span>
+<span class="cstat-no" title="statement not covered" >      if (this.isMobile) {</span>
+<span class="cstat-no" title="statement not covered" >        this.showMobileFilters = false</span>
+      }
+<span class="cstat-no" title="statement not covered" >      this.trackMenuClick('SF Menu Nav Type: All')</span>
+<span class="cstat-no" title="statement not covered" >      this.search()</span>
+<span class="cstat-no" title="statement not covered" >      this.$emit('menu-open', false)</span>
+    },
+<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >    async postCall () {</span></span>
+      await this.$tracker.event('Click', 'SF Menu Nav Type: Post a Call', 'Storefront Menu')
+<span class="cstat-no" title="statement not covered" >      window.location.href = '/project_menu/list-pc/create/'</span>
+    }
+  }
+}
+&lt;/script&gt;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Mar 05 2019 17:20:26 GMT+0000 (Coordinated Universal Time)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>
