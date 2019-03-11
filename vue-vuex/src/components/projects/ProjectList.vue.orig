@@ -1,0 +1,258 @@
+<template>
+  <div>
+
+    <nav-header />
+
+    <filter-bar @reset="reset" />
+
+    <featured
+      v-if="showFeatured"
+      :initial-tab="$route.query.tab"
+      :resetHome="resetHome"
+    />
+    <project-card-grid-header
+      class="py-3"
+      :categories="categories"
+      :selectedCategory="selectedCategory"
+      :selectedCategoryRoot="selectedCategoryRoot"
+      :sortOptions="sortOptions"
+      :showSortOptions="pageObj.count > 1"
+      @sort-option-change="reorder"
+      v-if="pageObj"
+      :defaultSortOption="defaultSortOption"
+    >
+      <div v-if="loading">
+        Loading projects...
+      </div>
+      <div v-if="!loading && pageObj.count > 0">
+        <strong>{{ pageObj.count }}</strong> project{{ pageObj.count|pluralize }}
+        <span v-if="selectedCategoryRoot">for <strong>{{ selectedCategoryRoot.name }}</strong></span>
+        <span v-if="searchTerm">for <strong>&quot;{{ searchTerm }}&quot;</strong></span>
+        <span v-if="numSelectedSkills > 0"> with
+          <strong>{{ firstSelectedSkill.name }} <span v-if="numOtherSkills > 0">+ {{ numOtherSkills }}</span> skill{{ numOtherSkills|pluralize }}</strong>
+        </span>
+      </div>
+
+      <template slot="print-card-count">
+        <div><strong>{{ pageObj.count }}</strong> project{{ pageObj.count|pluralize }}</div>
+      </template>
+    </project-card-grid-header>
+
+    <app-grid-list
+      :cards="projects"
+      :loading="loading"
+      :page="pageObj"
+      @next-page="nextPage"
+      @set-list-view="setListView"
+    >
+      <template slot="no-results-text">
+        <span v-if="searchTerm">
+          Sorry, there were no results found for <strong>"{{ searchTerm }}"</strong>.
+          <br class="hidden-md-down" />Try another term or filter projects by Category.
+        </span>
+        <span v-if="selectedCategory && !searchTerm">
+          Sorry, there were no results found for this category.
+        </span>
+        <span v-if="!selectedCategory && !searchTerm">
+          Sorry, we are unable to show any projects at the moment.
+        </span>
+      </template>
+
+      <template slot="grid">
+        <div class="col-md-4" v-for="project in projects" :key="project.id">
+          <project-card
+            :project="project"
+            :selectedCategory="selectedCategory"
+            :selectedCategoryRoot="selectedCategoryRoot"
+            :tracking="{label: 'SF Menu Project Cards', category: 'Storefront Menu'}"
+            class="mb-3"
+          ></project-card>
+        </div>
+      </template>
+
+      <template slot="list-header">
+        <div class="width-1 px-1 wishlist-header" v-if="wishlistEnabled">Save</div>
+        <div class="width-6 px-1">Project</div>
+        <div class="width-2 px-1">Estimated Time</div>
+        <div class="width-3 px-1">Category</div>
+      </template>
+
+      <template slot="list">
+        <project-row
+          v-for="project in projects" :key="project.id"
+          :project="project"
+          :selectedCategory="selectedCategory"
+          :selectedCategoryRoot="selectedCategoryRoot"
+          :tracking="{label: 'SF Menu Project List Row', category: 'Storefront Menu'}"
+        ></project-row>
+      </template>
+
+      <template slot="after-grid">
+        <div class="phonecall-cta-box bg-color-white p-3 mt-4 mx-1 mx-md-0">
+          <div class="row align-items-center">
+            <div class="col-md-2 text-center">
+              <img :src="owlIcon" width="105">
+            </div>
+            <div class="col-md-6 text-center text-md-left">
+              <div class="py-3 py-md-0">
+                <h5 class="mb-0 h4-md font-weight-semibold">Not sure where to start?</h5>
+                <span class="lead-md mb-0">Talk to an industry expert on a phone call.</span>
+              </div>
+            </div>
+            <div class="col-md-4 text-center text-md-right pb-4 pb-md-0">
+              <a role="button" class="btn btn-secondary btn-block" :href="pcMenuUrl">Start with a Call</a>
+            </div>
+          </div>
+        </div>
+      </template>
+    </app-grid-list>
+
+  </div>
+</template>
+
+<script>
+import { createNamespacedHelpers } from 'vuex'
+
+import NavHeader from '@/components/storefront/NavHeader'
+import FilterBar from '@/components/storefront/FilterBar'
+import Featured from '@/components/storefront/Featured'
+import AppGridList from '@/components/AppGridList'
+import ProjectCard from '@/components/storefront/ProjectCard'
+import ProjectRow from '@/components/storefront/ProjectRow'
+import ProjectCardGridHeader from '@/components/storefront/ProjectCardGridHeader'
+import { pluralize } from '@/filters'
+
+import owlIcon from '__STATIC__/images/responsive/projects/owl.png'
+
+const { mapGetters, mapActions } = createNamespacedHelpers('storefront')
+const { mapGetters: mapBreakpointGetters } = createNamespacedHelpers('breakpoints')
+
+export default {
+  components: {
+    NavHeader,
+    FilterBar,
+    Featured,
+    AppGridList,
+    ProjectCard,
+    ProjectRow,
+    ProjectCardGridHeader
+  },
+  metaInfo: {
+    title: 'Project Menu'
+  },
+  filters: {
+    pluralize
+  },
+  data () {
+    return {
+      owlIcon,
+      sortOptions: [
+        {
+          value: 'name',
+          label: 'Name (A-Z)'
+        },
+        {
+          value: 'popular',
+          label: 'Most Popular'
+        },
+        {
+          value: 'recent',
+          label: 'Most Recent'
+        }
+      ],
+      defaultSortOption: this.$route.query.order || 'name',
+      pcMenuUrl: '/project_menu/list-pc/create/',
+      resetHome: false
+    }
+  },
+  computed: {
+    searchTerm () {
+      return this.$route.query.q
+    },
+    selectedCategory () {
+      return this.$route.query.category && this.getCategory(this.$route.query.category)
+    },
+    selectedCategoryRoot () {
+      const category = this.selectedCategory
+      if (category) {
+        return category.parent ? this.getCategory(category.parent) : category
+      }
+    },
+    selectedSkills () {
+      return this.$route.query.skill ? this.getSelectedSkills(this.$route.query.skill) : []
+    },
+    numSelectedSkills () {
+      return this.selectedSkills.length
+    },
+    numOtherSkills () {
+      return this.numSelectedSkills - 1
+    },
+    firstSelectedSkill () {
+      return this.selectedSkills.length > 0 && this.selectedSkills[0]
+    },
+    showFeatured () {
+      return !this.$route.query.category && !this.$route.query.skill && !this.$route.query.q
+    },
+    ...mapGetters([
+      'categories',
+      'pageObj',
+      'projects',
+      'loading',
+      'getCategory',
+      'getSelectedSkills',
+      'wishlistEnabled'
+    ]),
+    ...mapBreakpointGetters(['isDesktop', 'isMobile'])
+  },
+  methods: {
+    reorder (order) {
+      const query = {...this.$route.query, order, ns: 1}
+      this.$tracker.event('Click', `SF Menu Sort By: ${order}`, 'Storefront Menu')
+      this.$router.push({
+        name: this.$route.name,
+        replace: true,
+        query
+      })
+    },
+    handleRouteChange () {
+      this.searchFromQuery()
+    },
+    searchFromQuery (page = 1) {
+      console.log('here', this.$route.query)
+      this.fetchProjects({
+        ...this.$route.query,
+        page,
+        searchTerm: this.searchTerm,
+        pageSize: this.$route.query.view === 'list' ? 16 : undefined,
+        skills: this.$route.query.skill
+      })
+    },
+    nextPage () {
+      this.$tracker.event('Click', 'SF Menu Show More Projects', 'Storefront Menu')
+      this.searchFromQuery(this.pageObj.number + 1)
+    },
+    ...mapActions(['fetchProjects']),
+    reset () {
+      this.resetHome = !this.resetHome
+    },
+    setListView () {
+      sessionStorage.setItem('isListView', true)
+      this.$router.push({
+        name: this.$route.name,
+        replace: true,
+        query: Object.assign({}, this.$route.query, {
+          ns: undefined,
+          view: 'list'
+        })
+      })
+    }
+  },
+  watch: {
+    // route changes are fired from nav toolbar or in the URL. We just pick up the changes here and update the store.
+    $route: {
+      handler: 'handleRouteChange',
+      immediate: true
+    }
+  }
+}
+</script>

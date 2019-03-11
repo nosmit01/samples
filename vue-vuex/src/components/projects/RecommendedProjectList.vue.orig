@@ -1,0 +1,146 @@
+<template>
+  <div>
+    <nav-header />
+    <filter-bar
+      :categories="categories"
+      :totalNewProjects="totalNewProjects"
+      :totalNumProjects="totalNumProjects"
+    />
+
+    <project-card-grid-header
+      v-if="pageObj"
+      class="py-3"
+      :sortOptions="sortOptions"
+      :showSortOptions="totalNewProjects > 1"
+      @sort-option-change="reorder"
+      :defaultSortOption="defaultSortOption"
+    >
+      <div v-if="loading">
+        Loading projects...
+      </div>
+      <div v-else>
+        <strong>{{ pageObj.count }} Recommended Project{{ pageObj.count|pluralize }}</strong>
+      </div>
+    </project-card-grid-header>
+
+    <app-grid-list
+      :cards="projects"
+      :loading="loading"
+      :page="pageObj"
+      @next-page="nextPage">
+      <template slot="no-results-text">
+        There are no recommended projects right now.
+      </template>
+
+      <template slot="grid">
+        <div class="col-md-4" v-for="project in projects" :key="project.id">
+          <project-card
+            :project="project"
+            :selectedCategory="selectedCategory"
+            :tracking="{label: 'SF Menu Project Cards', category: 'Storefront Menu'}"
+            class="mb-3"
+          ></project-card>
+        </div>
+      </template>
+
+      <template slot="list">
+        <project-row
+          v-for="project in projects" :key="project.id"
+          :project="project"
+          :selectedCategory="selectedCategory"
+          :tracking="{label: 'SF Menu Project Cards', category: 'Storefront Menu'}"
+        ></project-row>
+      </template>
+
+    </app-grid-list>
+
+  </div>
+</template>
+
+<script>
+import { createNamespacedHelpers } from 'vuex'
+
+import NavHeader from '@/components/storefront/NavHeader'
+import FilterBar from '@/components/storefront/FilterBar'
+import AppGridList from '@/components/AppGridList'
+import ProjectCard from '@/components/storefront/ProjectCard'
+import ProjectRow from '@/components/storefront/ProjectRow'
+import ProjectCardGridHeader from '@/components/storefront/ProjectCardGridHeader'
+import { pluralize } from '@/filters'
+
+const { mapGetters, mapActions } = createNamespacedHelpers('storefront')
+
+export default {
+  components: {
+    NavHeader,
+    FilterBar,
+    AppGridList,
+    ProjectCard,
+    ProjectRow,
+    ProjectCardGridHeader
+  },
+  metaInfo: {
+    title: 'Projects'
+  },
+  filters: {
+    pluralize
+  },
+  data () {
+    return {
+      sortOptions: [
+        {
+          value: 'name',
+          label: 'Name (A-Z)'
+        },
+        {
+          value: 'popular',
+          label: 'Most Popular'
+        },
+        {
+          value: 'recent',
+          label: 'Most Recent'
+        }
+      ],
+      defaultSortOption: this.$route.query.order || 'popular'
+    }
+  },
+  computed: {
+    selectedCategory () {
+      return this.$route.query.category && this.getCategory(this.$route.query.category)
+    },
+    ...mapGetters([
+      'totalNumProjects',
+      'totalNewProjects',
+      'categories',
+      'pageObj',
+      'projects',
+      'loading',
+      'getCategory'
+    ])
+  },
+  methods: {
+    reorder (order) {
+      const query = {...this.$route.query, order, ns: 1}
+      this.$router.push({
+        name: this.$route.name,
+        replace: true,
+        query
+      })
+    },
+    fetchRecommendedProjects () {
+      this.fetchProjects({...this.$route.query, order: this.$route.query.order || this.defaultSortOption, page: 1, limit: 18})
+    },
+    nextPage () {
+      this.fetchProjects({...this.$route.query, page: this.pageObj.number + 1})
+    },
+    ...mapActions(['fetchProjects'])
+  },
+  watch: {
+    // route changes are fired from nav toolbar or in the URL. We just pick up the changes here and update the store.
+    $route: {
+      handler: 'fetchRecommendedProjects',
+      immediate: true
+    }
+  }
+}
+</script>

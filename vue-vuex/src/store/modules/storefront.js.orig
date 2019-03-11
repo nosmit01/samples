@@ -1,0 +1,340 @@
+import Vue from 'vue'
+import axios from 'axios'
+import qs from 'qs'
+import find from 'lodash/find'
+import filter from 'lodash/filter'
+import includes from 'lodash/includes'
+import isArray from 'lodash/isArray'
+import shuffle from 'lodash/shuffle'
+import map from 'lodash/map'
+
+const state = {
+  categories: [],
+  skills: [],
+  projects: [],
+  bundles: [],
+  featuredRecommendedProjects: [],
+  featuredNewProjects: [],
+  featuredBundles: [],
+  wishlist: [],
+  totalNumProjects: 0,
+  totalNewProjects: 0,
+  wishlistEnabled: false,
+  loading: false,
+  loadingFeatured: false,
+  pageObj: null,
+  projectDetail: null,
+  projectNotFound: false,
+  bundleDetail: null,
+  bundleNotFound: false
+}
+
+export async function fetchBundles (commit, params) {
+  const { featured, page } = params
+  const loadingState = featured ? 'loadingFeatured' : 'loading'
+
+  if (!featured) {
+    commit(loadingState, { loading: true })
+  }
+
+  if ((!parseInt(page) || page === 1) && !featured) {
+    commit('clearBundles')
+  }
+
+  try {
+    const response = await axios.get('/menu/api/bundles/', { params })
+    let bundles = response.data.results
+
+    if (featured) {
+      let featuredBundles = []
+      if (bundles.length > 3) {
+        const storageKey = 'featuredBundles'
+        const storage = JSON.parse(sessionStorage.getItem(storageKey))
+
+        if (storage) {
+          featuredBundles = filter(map(storage, id => find(bundles, bundle => bundle.id === id)))
+        }
+
+        // make sure we don't get any stale bundles
+        if (featuredBundles.length < 4) {
+          featuredBundles = shuffle(bundles).slice(0, 4)
+          sessionStorage.setItem(storageKey, JSON.stringify(map(featuredBundles, bundle => bundle.id)))
+        }
+      }
+      commit('featuredBundles', { bundles: featuredBundles })
+    } else {
+      commit('bundles', { bundles })
+      commit('pageObj', { pageObj: response.data.page })
+    }
+    commit(loadingState, { loading: false })
+  } catch (e) {
+    commit(loadingState, { loading: false })
+  }
+}
+
+export async function fetchProjects (commit, url, params, isFeatured) {
+  const loadingState = isFeatured ? 'loadingFeatured' : 'loading'
+  commit(loadingState, { loading: true })
+  // If it's a new search we want to clear out existing projects.
+  // Otherwise append to current list
+  const { page } = params
+  if (isFeatured) {
+    commit('clearFeaturedProjects')
+  } else if ((!parseInt(page) || page === 1)) {
+    commit('clearProjects')
+  }
+  try {
+    const response = await axios.get(url, {
+      params,
+      paramsSerializer (params) {
+        // ensure that we pass any arrays in format x=1&x=2 not x[]=1&x[]=2
+        return qs.stringify(params, { arrayFormat: 'repeat' })
+      }
+    })
+
+    if (isFeatured) { // if featured projects, then first check sessionStorage
+      const featuredProjectType = params.order === 'popular'
+        ? 'featuredRecommendedProjects'
+        : 'featuredNewProjects'
+
+      let featuredProjects = response.data.results
+
+      // shuffle and store order if "popular"
+      if (featuredProjectType === 'featuredRecommendedProjects') {
+        const storage = JSON.parse(sessionStorage.getItem(featuredProjectType))
+        if (storage && storage.length > 3) {
+          featuredProjects = filter(response.data.results, item => includes(storage, item.id))
+        } else {
+          featuredProjects = shuffle(featuredProjects)
+          sessionStorage.setItem(
+            featuredProjectType,
+            JSON.stringify(map(featuredProjects, project => project.id)))
+        }
+      }
+
+      featuredProjects = featuredProjects.slice(0, 4)
+      commit(featuredProjectType, { projects: featuredProjects })
+    } else {
+      commit('pageObj', { pageObj: response.data.page })
+      commit('projects', { projects: response.data.results })
+    }
+    commit(loadingState, { loading: false })
+  } catch (e) {
+    commit(loadingState, { loading: false })
+  }
+}
+
+export const actions = {
+  initialize ({ commit }, initData) {
+    commit('initialize', { initData })
+  },
+  toggleWishlist ({ commit, state }, id) {
+    const remove = includes(state.wishlist, id)
+    const action = remove ? 'remove' : 'add'
+    axios.post(`/menu/api/wishlist/${action}/${id}/`)
+    commit('toggleWishlist', { id })
+  },
+  async fetchProject ({ commit }, { id, bundle }) {
+    commit('loading', { loading: true })
+    commit('projectNotFound', { projectNotFound: false })
+    commit('projectDetail', { projectDetail: null })
+    try {
+      const response = await axios.get(`/menu/api/projects/${id}/`, {params: { bundle }})
+      commit('projectDetail', { projectDetail: response.data })
+      commit('loading', { loading: false })
+    } catch (e) {
+      commit('loading', { loading: false })
+      commit('projectNotFound', { projectNotFound: true })
+    }
+  },
+  async fetchBundle ({ commit }, id) {
+    commit('loading', { loading: true })
+    commit('bundleNotFound', { bundleNotFound: false })
+    commit('bundleDetail', { bundleDetail: null })
+    try {
+      const response = await axios.get(`/menu/api/bundles/${id}/`)
+      commit('bundleDetail', { bundleDetail: response.data })
+      commit('loading', { loading: false })
+    } catch (e) {
+      commit('loading', { loading: false })
+      commit('bundleNotFound', { bundleNotFound: true })
+    }
+  },
+  fetchFeaturedBundles ({ commit }) {
+    fetchBundles(commit, { featured: 1 })
+  },
+  fetchBundles ({ commit }, params) {
+    fetchBundles(commit, params)
+  },
+  fetchWishlist ({ commit }, params) {
+    fetchProjects(commit, '/menu/api/wishlist/', params)
+  },
+  fetchProjects ({ commit }, { searchTerm, page, order, category, isNew, skills, limit, pageSize }) {
+    fetchProjects(commit, '/menu/api/projects/', {
+      q: searchTerm,
+      category,
+      page,
+      skills,
+      limit,
+      new: isNew ? '1' : undefined,
+      page_size: pageSize,
+      order: !order && !category && !skills ? 'name' : order
+    })
+  },
+  fetchFeaturedProjects ({ commit }, { order }) {
+    fetchProjects(commit, '/menu/api/projects/', {
+      order
+    }, true)
+  }
+}
+
+export const mutations = {
+  initialize (state, { initData }) {
+    Vue.set(state, 'totalNumProjects', initData.num_projects)
+    Vue.set(state, 'totalNewProjects', initData.num_new_projects)
+    Vue.set(state, 'categories', initData.project_categories)
+    Vue.set(state, 'wishlist', initData.wishlist)
+    Vue.set(state, 'wishlistEnabled', initData.wishlist_enabled)
+    Vue.set(state, 'skills', initData.skills)
+  },
+  loading (state, { loading }) {
+    state.loading = loading
+  },
+  loadingFeatured (state, { loading }) {
+    state.loadingFeatured = loading
+  },
+  pageObj (state, { pageObj }) {
+    Vue.set(state, 'pageObj', pageObj)
+  },
+  projectDetail (state, { projectDetail }) {
+    Vue.set(state, 'projectDetail', projectDetail)
+  },
+  projectNotFound (state, { projectNotFound }) {
+    Vue.set(state, 'projectNotFound', projectNotFound)
+  },
+  bundleDetail (state, { bundleDetail }) {
+    Vue.set(state, 'bundleDetail', bundleDetail)
+  },
+  bundleNotFound (state, { bundleNotFound }) {
+    Vue.set(state, 'bundleNotFound', bundleNotFound)
+  },
+  projects (state, { projects }) {
+    Vue.set(state, 'projects', state.projects.concat(projects))
+    Vue.set(state, 'projectDetail', null)
+  },
+  featuredRecommendedProjects (state, { projects }) {
+    Vue.set(state, 'featuredRecommendedProjects', projects)
+  },
+  featuredNewProjects (state, { projects }) {
+    Vue.set(state, 'featuredNewProjects', projects)
+  },
+  bundles (state, { bundles }) {
+    Vue.set(state, 'bundles', state.bundles.concat(bundles))
+    Vue.set(state, 'bundleDetail', null)
+  },
+  featuredBundles (state, { bundles }) {
+    Vue.set(state, 'featuredBundles', bundles)
+  },
+  clearFeaturedProjects (state) {
+    Vue.set(state, 'featuredRecommendedProjects', [])
+    Vue.set(state, 'featuredNewProjects', [])
+  },
+  clearProjects (state) {
+    Vue.set(state, 'projects', [])
+  },
+  clearBundles (state) {
+    Vue.set(state, 'bundles', [])
+  },
+  toggleWishlist (state, { id }) {
+    let { wishlist } = state
+    if (includes(wishlist, id)) {
+      wishlist = filter(wishlist, wid => wid !== id)
+    } else {
+      wishlist.push(id)
+    }
+    Vue.set(state, 'wishlist', wishlist)
+  }
+}
+
+export const getters = {
+  categories (state) {
+    return state.categories
+  },
+  rootCategories (state) {
+    return state.categories.filter(a => !a.parent)
+  },
+  skills (state) {
+    return state.skills
+  },
+  totalNumProjects (state) {
+    return state.totalNumProjects
+  },
+  totalNewProjects (state) {
+    return state.totalNewProjects
+  },
+  loading (state) {
+    return state.loading
+  },
+  loadingFeatured (state) {
+    return state.loadingFeatured
+  },
+  wishlistEnabled (state) {
+    return state.wishlistEnabled
+  },
+  wishlistCount (state) {
+    return state.wishlist.length
+  },
+  isWishlisted (state) {
+    return id => includes(state.wishlist, id)
+  },
+  getCategory (state) {
+    return id => find(state.categories, category => category.id === parseInt(id))
+  },
+  getSubcategories (state) {
+    return id => filter(state.categories, category => category.parent === parseInt(id))
+  },
+  getSelectedSkills (state) {
+    return ids => {
+      const selected = isArray(ids) ? ids : [ids]
+      return filter(state.skills, skill => selected.includes(skill.id.toString()))
+    }
+  },
+  projectDetail (state) {
+    return state.projectDetail
+  },
+  projectNotFound (state) {
+    return state.projectNotFound
+  },
+  bundleDetail (state) {
+    return state.bundleDetail
+  },
+  bundleNotFound (state) {
+    return state.bundleNotFound
+  },
+  projects (state) {
+    return state.projects
+  },
+  bundles (state) {
+    return state.bundles
+  },
+  featuredRecommendedProjects (state) {
+    return state.featuredRecommendedProjects
+  },
+  featuredNewProjects (state) {
+    return state.featuredNewProjects
+  },
+  featuredBundles (state) {
+    return state.featuredBundles
+  },
+  pageObj (state) {
+    return state.pageObj
+  }
+}
+
+export default {
+  state,
+  actions,
+  mutations,
+  getters,
+  namespaced: true
+}

@@ -1,0 +1,69 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+
+import storefront from './storefront'
+import store from '../store'
+
+Vue.use(Router)
+
+const router = new Router({
+  routes: [
+    {
+      path: '/',
+      redirect: window.__INITROUTE__
+    },
+    storefront,
+    {
+      path: '*',
+      component: require('@/components/NotFound').default
+    }
+  ],
+  mode: 'history',
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else if (to.query.ns) {
+      // no scroll flag is set
+      return false
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
+})
+
+const absoluteURL = route => `${window.location.protocol}//${window.location.host}${route.fullPath}`
+
+const trackPageView = (to, from) => {
+  // triggers Google Analytics/Segment page view event
+  if (window.hasOwnProperty('analytics')) {
+    const search = to.fullPath.split('?')[1]
+
+    window.analytics.page(null, null, {
+      url: absoluteURL(to),
+      path: to.path,
+      search: search ? '?' + search : '',
+      referrer: from && absoluteURL(from)
+    })
+  }
+}
+
+router.beforeEach((to, from, next) => {
+  // We don't need the full loading screen when transitioning
+  // internally
+  if (!from.path || from.path === '/') {
+    store.dispatch('routing/startLoading')
+  } else {
+    trackPageView(to, from)
+  }
+  next()
+})
+
+router.afterEach((to, from, next) => {
+  store.dispatch('routing/stopLoading')
+
+  next({
+    query: { view: JSON.parse(sessionStorage.getItem('isListView')) ? 'list' : undefined }
+  })
+})
+
+export default router

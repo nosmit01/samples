@@ -1,0 +1,143 @@
+<template>
+  <ul class="caf-filter-bar-dropdown">
+    <li
+      class="px-2 category"
+      @click="resetSearch"
+      :class="{'active': !selectedCategory && !wishlistActive && !searchTerm}"
+    >
+      <span class="label">All Projects</span>
+      <span class="count" v-if="totalNumProjects">{{ totalNumProjects }}</span>
+    </li>
+    <li
+      class="px-2 category"
+      v-for="category in categories"
+      :key="category.id"
+      :value="category.id"
+      :class="{'active': category.id === selectedCategory}"
+      @click="browseCategory(category.id, category.name)"
+    >
+      <span class="label">{{ category.name }}</span>
+      <span class="count">{{ category.num_projects }}</span>
+    </li>
+    <li
+      class="px-2 category"
+      @click="postCall"
+    >
+      <span class="label">Post a Call</span>
+      <span class="count"><span class="ico-call"></span></span>
+    </li>
+  </ul>
+</template>
+
+<script>
+import { createNamespacedHelpers } from 'vuex'
+
+const { mapGetters: mapBreakpointGetters } = createNamespacedHelpers('breakpoints')
+
+export default {
+  props: {
+    totalNumProjects: {
+      type: Number,
+      required: true
+    },
+    categories: {
+      type: Array,
+      required: true
+    },
+    isWishlist: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
+  data () {
+    return {
+      searchTerm: '',
+      expandSearch: null,
+      searchActive: false,
+      showMobileFilters: false,
+      wishlistActive: this.isWishlist
+    }
+  },
+  computed: {
+    selectedCategory () {
+      const category = parseInt(this.$route.query.category)
+      return category || null
+    },
+    ...mapBreakpointGetters(['isDesktop', 'isMobile'])
+  },
+  watch: {
+    $route: {
+      handler: 'updateSearch',
+      immediate: true
+    }
+  },
+  methods: {
+    trackMenuClick (label) {
+      this.$tracker.event('Click', label, 'Storefront Menu')
+    },
+    updateSearch () {
+      const { q } = this.$route.query || {}
+      this.searchTerm = q || ''
+      this.searchActive = this.searchTerm !== ''
+      this.expandSearch = this.searchTerm !== ''
+    },
+    browseCategory (categoryId, name) {
+      this.searchTerm = ''
+      this.searchActive = false
+      this.expandSearch = false
+      if (this.isMobile) {
+        this.showMobileFilters = false
+      }
+      this.trackMenuClick(`SF Menu Nav Type: ${name} ${categoryId}`)
+      this.search(categoryId)
+      this.$emit('drawer-open', false)
+    },
+    browseNewProjects () {
+      this.trackMenuClick('SF Menu Nav Type: New Projects')
+      this.$router.push({
+        name: 'storefront:new',
+        replace: true
+      })
+      this.$emit('drawer-open', false)
+    },
+    search (categoryId) {
+      if (this.searchTerm) {
+        this.searchActive = true
+        this.expandSearch = true
+      }
+      const query = {order: 'name', view: JSON.parse(sessionStorage.getItem('isListView')) ? 'list' : undefined}
+
+      if (categoryId) {
+        query.category = categoryId
+      } else if (this.searchTerm) {
+        query.q = this.searchTerm
+        this.$tracker.event('Submit', 'SF Menu Nav Search', 'Storefront Menu')
+      }
+
+      this.$router.push({
+        name: 'storefront:projects',
+        replace: true,
+        query
+      })
+    },
+    resetSearch () {
+      this.searchTerm = ''
+      this.searchActive = false
+      this.wishlistActive = false
+      this.expandSearch = false
+      if (this.isMobile) {
+        this.showMobileFilters = false
+      }
+      this.trackMenuClick('SF Menu Nav Type: All')
+      this.search()
+      this.$emit('drawer-open', false)
+    },
+    async postCall () {
+      await this.$tracker.event('Click', 'SF Menu Nav Type: Post a Call', 'Storefront Menu')
+      window.location.href = '/project_menu/list-pc/create/'
+    }
+  }
+}
+</script>

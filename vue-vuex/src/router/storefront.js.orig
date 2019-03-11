@@ -1,0 +1,41 @@
+export default {
+  path: '/menu',
+  component: () => import(/* webpackChunkName: "sf-layout" */ '@/components/storefront/Layout'),
+  children: [
+    {
+      path: '',
+      name: 'storefront:projects',
+      component: () => import(/* webpackChunkName: "sf-project-list" */ '@/components/storefront/ProjectList'),
+    },
+    {
+      path: 'bundles',
+      name: 'storefront:bundles',
+      component: () => import(/* webpackChunkName: "sf-bundle-list" */ '@/components/storefront/BundleList')
+    },
+    {
+      path: 'recommended',
+      name: 'storefront:recommended',
+      component: () => import(/* webpackChunkName: "sf-recommended-project-list" */ '@/components/storefront/RecommendedProjectList')
+    },
+    {
+      path: 'new',
+      name: 'storefront:new',
+      component: () => import(/* webpackChunkName: "sf-new-project-list" */ '@/components/storefront/NewProjectList')
+    },
+    {
+      path: 'wishlist',
+      name: 'storefront:wishlist',
+      component: () => import(/* webpackChunkName: "sf-wishlist" */ '@/components/storefront/Wishlist')
+    },
+    {
+      path: 'project/:id/:slug?',
+      name: 'storefront:project',
+      component: () => import(/* webpackChunkName: "sf-project-detail" */ '@/components/storefront/ProjectDetail')
+    },
+    {
+      path: 'bundles/:id/:slug?',
+      name: 'storefront:bundle',
+      component: () => import(/* webpackChunkName: "sf-bundle-detail" */ '@/components/storefront/BundleDetail')
+    }
+  ]
+}

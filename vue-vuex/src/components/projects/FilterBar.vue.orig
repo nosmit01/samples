@@ -1,0 +1,479 @@
+<template>
+  <div class="caf-filter-bar-container sticky-top hidden-print">
+    <div class="container-fluid caf-filter-bar bg-color-white" ref="filterBar">
+      <div
+      class="container h-100 d-flex align-items-center justify-content-between text-caf-blue font-weight-semibold"
+    >
+      <div class="caf-filter-bar-col" v-if="!isDetailPage">
+        <router-link
+          :to="homeLink"
+          class="caf-filter-bar-col-item home-button border-left px-3"
+          :class="{'active' : !selectedCategory && !selectedSkills && !wishlistActive && !searchActive && !mobileFilterActive}"
+          @click.native="homeClicked"
+        >
+          <div>
+            <span class="ico-home"></span>
+          </div>
+        </router-link>
+        <div
+          class="caf-filter-bar-col-item mobile-filter border-left border-right px-2 hidden-lg-up"
+          :class="{'active' : mobileFilterActive}"
+          @click="drawerOpen"
+        >
+          <span class="pr-1"><font-awesome-icon :icon="faFilter" size="lg" /></span> Filter
+        </div>
+        <filter-bar-filter
+          label="Filter by Category"
+          @dropdown-open="$tracker.event('Click', 'SF Menu Nav', 'Storefront Menu'); drawerOpen(false)"
+          v-if="!isMobile && rootCategories && rootCategories.length > 0"
+          :active="!!selectedCategory && !isMobile"
+          :disabled="disableCategoryFilter"
+          :filterByCategory="true"
+          :styles="selectedCategoryGradient"
+        >
+          <category-list
+            :categories="rootCategories"
+            :totalNumProjects="totalNumProjects"
+            :isWishlist="isWishlist"
+          />
+        </filter-bar-filter>
+        <filter-bar-filter
+          label="Filter by Skills"
+          v-if="!isMobile"
+          :disabled="disableSkillFilter"
+          :active="selectedSkills && !isMobile"
+          :isDrawerOpen="drawerOpened"
+          @drawer-open="$tracker.event('Click', 'SF Menu Nav Skills', 'Storefront Menu'); drawerOpen()"
+        />
+      </div>
+
+      <div class="caf-filter-bar-col" v-if="!!bundleDetail || !!bundleNotFound">
+        <ul class="caf-breadcrumb pl-2 pl-md-0" v-if="!isMobile">
+          <li class="border-left pl-3"><router-link :to="homeLink" @click.native="$tracker.event('Click', 'Bundle Details Breadcrumb: Home', 'Bundle Details')"><span class="ico-home"></span></router-link></li>
+          <li class="next-crumb hidden-md-down" v-if="bundleName"><span>{{ bundleName }}</span></li>
+        </ul>
+        <div class="caf-breadcrumb pl-3 align-items-center font-size-1" v-if="isMobile">
+          <router-link
+            class="text-caf-blue font-weight-bold"
+            :to="homeLink"
+            @click.native="$tracker.event('Click', 'Bundle Details Breadcrumb: Home', 'Bundle Details')">
+            &lt; Back
+          </router-link>
+        </div>
+      </div>
+
+      <div class="caf-filter-bar-col" v-if="!!projectDetail || !!projectNotFound">
+        <ul class="caf-breadcrumb pl-2 pl-md-0" v-if="!isMobile">
+          <li class="border-left pl-3"><router-link :to="homeLink" @click.native="!!projectDetail && !!projectDetail.bundle ? $tracker.event('Click', 'Bundle Details Breadcrumb: Home', 'Bundle Details') : $tracker.event('Click', 'Proj Details Breadcrumb: All Projects', 'Project Details')"><span class="ico-home"></span></router-link></li>
+          <li class="current-crumb" v-if="!!projectDetail && !!projectDetail.bundle"><router-link :to="{name: 'storefront:bundle', params: {id: projectDetail.bundle.id, slug: projectDetail.bundle.slug}}" @click.native="$tracker.event('Click', 'Bundle Details Breadcrumb: Bundle', 'Bundle Details')">{{ projectDetail.bundle.title }}</router-link>
+          <li class="current-crumb" v-if="selectedCategory && selectedCategoryName && !projectDetail.bundle"><router-link :to="{name: 'storefront:projects', query: { category: selectedCategory, order: 'name' }}" @click.native="$tracker.event('Click', 'Proj Details Breadcrumb: Category', 'Project Details')">{{ selectedCategoryName }}</router-link></li>
+          <li class="next-crumb hidden-md-down"><span>{{ projectName }}</span></li>
+        </ul>
+        <div class="caf-breadcrumb pl-3 align-items-center font-size-1" v-if="isMobile">
+          <router-link
+            v-if="!!projectDetail && !!projectDetail.bundle"
+            class="text-caf-blue font-weight-bold"
+            :to="{name: 'storefront:bundle', params: {id: projectDetail.bundle.id, slug: projectDetail.bundle.slug}}"
+            @click.native="$tracker.event('Click', 'Bundle Details Breadcrumb: Bundle', 'Bundle Details')">
+            &lt; Back
+          </router-link>
+          <router-link
+            v-else
+            class="text-caf-blue font-weight-bold"
+            :to="homeLink"
+            @click.native="$tracker.event('Click', 'Proj Details Breadcrumb: All Projects', 'Project Details')">
+            &lt; Back
+          </router-link>
+        </div>
+      </div>
+
+      <div class="caf-filter-bar-col"
+           :class="{'expand' : expandSearch, 'collapse' : !expandSearch}"
+      >
+        <div
+          v-if="wishlistEnabled"
+          class="caf-filter-bar-col-item caf-filter-bar-wishlist border-left pl-2 pr-2 py-0"
+          :class="{'active' : wishlistActive}"
+        >
+          <router-link
+            :to="{name:'storefront:wishlist'}"
+            v-on:click.native="setWishlistActive"
+            class="d-flex justify-content-center align-items-center"
+          >
+            <span class="wishlist-star-container pr-0 pr-md-1">
+              <font-awesome-icon
+                :icon="faStar"
+                size="lg"
+                class="wishlist-star"
+                :class="{'animate' : animateWishlist}"
+              />
+              <font-awesome-icon :icon="faStar" size="lg" />
+            </span>
+            <span class="hidden-md-down">Saved</span>
+            <span class="wishlist-count hidden-md-down">{{ wishlistCount }}</span>
+          </router-link>
+        </div>
+        <div class="caf-filter-bar-col-item search border-left border-right"
+             :class="{'expand' : expandSearch, 'collapse' : !expandSearch, 'active' : searchActive}"
+        >
+          <form @submit.prevent="search(null)">
+            <input
+              class="search-input ml-2 pr-2"
+              type="text"
+              placeholder="Search"
+              ref="searchTerm"
+              v-model="searchTerm"
+              @click="$refs.searchTerm.select()"
+              @focus="setExpandSearch"
+              @blur="setCollapseSearch"
+            />
+          </form>
+          <span
+            class="search-icon ml-1 mr-2"
+            @click="setExpandSearch"
+          >
+            <font-awesome-icon :icon="faSearch" flip="horizontal" size="lg" />
+          </span>
+          <div class="border-left px-1 hidden-lg-up h-100 d-flex justify-content-center align-items-center"
+               v-if="this.expandSearch"
+               @click="resetSearch"
+          >
+            <span class="ico-close-gray"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <filter-bar-drawer
+      :isOpen="drawerOpened"
+      :isMobile="isMobile"
+    >
+      <div v-if="isMobile" class="caf-filter-bar-drawer-items d-flex align-items-center px-2">
+        <div
+          class="caf-filter-bar-drawer-item mr-3"
+          :class="{'active' : filterByCategory}"
+          @click="filterByCategory = true">
+          By Type
+        </div>
+        <div
+          class="caf-filter-bar-drawer-item"
+          :class="{'active' : !filterByCategory}"
+          @click="filterByCategory = false">
+          By Skills
+        </div>
+      </div>
+
+      <category-list
+        v-if="filterByCategory"
+        :categories="rootCategories"
+        :totalNumProjects="totalNumProjects"
+        @drawer-open="drawerOpen"
+      />
+      <skills-list
+        v-if="!filterByCategory"
+        :skills="skills"
+        @drawer-open="drawerOpen"
+      />
+    </filter-bar-drawer>
+  </div>
+</template>
+
+<script>
+import { createNamespacedHelpers } from 'vuex'
+import FilterBarFilter from '@/components/storefront/FilterBarFilter'
+import FilterBarDrawer from './FilterBarDrawer'
+import CategoryList from '@/components/storefront/CategoryList'
+import SkillsList from '@/components/storefront/SkillsList'
+import FontAwesomeIcon from '@fortawesome/vue-fontawesome'
+import faStar from '@fortawesome/fontawesome-free-regular/faStar'
+import faSearch from '@fortawesome/fontawesome-free-solid/faSearch'
+import faFilter from '@fortawesome/fontawesome-free-solid/faFilter'
+import truncate from 'lodash/truncate'
+import get from 'lodash/get'
+import forEach from 'lodash/forEach'
+
+const { mapGetters, mapActions } = createNamespacedHelpers('storefront')
+const { mapGetters: mapBreakpointGetters } = createNamespacedHelpers('breakpoints')
+
+export default {
+  props: {
+    projectDetail: {
+      type: Object,
+      required: false
+    },
+    projectNotFound: {
+      type: Boolean,
+      required: false
+    },
+    bundleDetail: {
+      type: Object,
+      required: false
+    },
+    bundleNotFound: {
+      type: Boolean,
+      default: false
+    },
+    disableSkillFilter: {
+      type: Boolean,
+      default: false
+    },
+    disableCategoryFilter: {
+      type: Boolean,
+      default: false
+    },
+    isWishlist: {
+      type: Boolean,
+      default () {
+        return false
+      }
+    }
+  },
+  components: {
+    FilterBarFilter,
+    FilterBarDrawer,
+    SkillsList,
+    CategoryList,
+    FontAwesomeIcon
+  },
+  data () {
+    return {
+      faStar,
+      faSearch,
+      faFilter,
+      searchTerm: '',
+      order: 'name',
+      animateWishlist: false,
+      expandSearch: null,
+      searchActive: false,
+      wishlistActive: this.isWishlist,
+      filterByCategory: null,
+      drawerOpened: false
+    }
+  },
+  computed: {
+    homeLink () {
+      let to = {name: 'storefront:projects', query: {view: JSON.parse(sessionStorage.getItem('isListView')) ? 'list' : undefined}}
+      if (this.bundleDetail ||
+          (this.projectDetail && this.projectDetail.bundle) ||
+          this.$route.name === 'storefront:bundles') {
+        to.query = {tab: 'bundles'}
+      } else if (this.$route.name === 'storefront:new') {
+        to.query = {tab: 'new'}
+      }
+      return to
+    },
+    isDetailPage () {
+      return !!this.projectDetail || !!this.bundleDetail || this.bundleNotFound || this.projectNotFound
+    },
+    selectedCategory () {
+      const category = parseInt(this.$route.query.category)
+      return category || (this.projectDetail ? this.projectDetail.category.id : null)
+    },
+    selectedCategoryName () {
+      const category = this.selectedCategory && this.getCategory(this.selectedCategory)
+      return category && category.name
+    },
+    selectedCategoryGradient () {
+      let category = this.selectedCategory && this.getCategory(this.selectedCategory)
+
+      if (get(category, 'parent')) {
+        category = this.getCategory(category.parent)
+      }
+
+      const categoryColor = get(category, 'color', '#fff')
+      let gradient = ''
+
+      forEach(categoryColor, val => {
+        if (val !== '#') {
+          const value = parseInt(val, 16)
+          const newValue = Math.ceil(Math.min(15, (value + (value / 3))))
+          gradient += newValue.toString(16)
+        }
+      })
+
+      gradient = `#${gradient}`
+
+      if (category) {
+        return {
+          gradient: {
+            background: categoryColor && `linear-gradient(77.71deg, ${categoryColor} -0.07%, ${gradient} 99.72%)`,
+            color: category && categoryColor ? '#fff' : '#0E1630',
+            borderBottom: 'none',
+            paddingBottom: '2px'
+          }
+        }
+      }
+
+      return {}
+    },
+    selectedSkills () {
+      const skills = this.$route.query.skill
+      return skills || null
+    },
+    bundleName () {
+      return (this.bundleDetail && this.bundleDetail.title) || ''
+    },
+    projectName () {
+      if (this.projectDetail) {
+        const lastCrumb = this.projectDetail.bundle ? this.projectDetail.bundle.title : this.selectedCategoryName
+        const length = (this.wishlistEnabled ? 55 : 75) - (lastCrumb ? lastCrumb.length : 0)
+        return truncate(this.projectDetail.name, { length })
+      }
+      return ''
+    },
+    mobileFilterActive () {
+      return this.drawerOpened || !!this.selectedCategory || this.selectedSkills
+    },
+    ...mapGetters([
+      'totalNumProjects',
+      'rootCategories',
+      'skills',
+      'getCategory',
+      'wishlistEnabled',
+      'wishlistCount'
+    ]),
+    ...mapBreakpointGetters(['isDesktop', 'isMobile'])
+  },
+  watch: {
+    $route: {
+      handler: 'updateSearch',
+      immediate: true
+    },
+    wishlistCount (newCount, oldCount) {
+      if (newCount > oldCount) {
+        this.animateWishlist = true
+        setTimeout(() => {
+          this.animateWishlist = false
+        }, 1000)
+      }
+    }
+  },
+  methods: {
+    trackMenuClick (label) {
+      this.$tracker.event('Click', label, 'Storefront Menu')
+    },
+    updateSearch () {
+      const { order, q } = this.$route.query || {}
+      this.order = order || 'name'
+      this.searchTerm = q || ''
+      this.searchActive = this.searchTerm !== ''
+      this.expandSearch = this.searchTerm !== ''
+      /*this.$router.replace({
+        query: Object.assign({}, this.$route.query, {
+          view: JSON.parse(sessionStorage.getItem('isListView')) ? 'list' : undefined
+        })
+      })*/
+    },
+    browseCategory (categoryId, name) {
+      this.searchTerm = ''
+      this.searchActive = false
+      this.wishlistActive = false
+      this.expandSearch = false
+      if (this.isMobile) {
+        this.$emit('drawer-open', false)
+      }
+      this.trackMenuClick(`SF Menu Nav Type: ${name} ${categoryId}`)
+      this.search(categoryId)
+    },
+    browseNewProjects () {
+      this.trackMenuClick('SF Menu Nav Type: New Projects')
+      this.$router.push({
+        name: 'storefront:new',
+        replace: true
+      })
+    },
+    search (categoryId, order) {
+      this.wishlistActive = false
+      if (this.searchTerm) {
+        this.searchActive = true
+        this.expandSearch = true
+      }
+      const query = {order: 'popular', view: JSON.parse(sessionStorage.getItem('isListView')) ? 'list' : undefined}
+
+      if (categoryId) {
+        query.category = categoryId
+        query.order = 'name'
+      } else if (this.searchTerm) {
+        query.q = this.searchTerm
+        query.order = 'name'
+        this.$tracker.event('Submit', 'SF Menu Nav Search', 'Storefront Menu', {
+          query: this.searchTerm
+        })
+      }
+
+      this.$router.push({
+        name: 'storefront:projects',
+        replace: true,
+        query
+      })
+    },
+    resetSearch () {
+      this.order = 'name'
+      this.searchTerm = ''
+      this.searchActive = false
+      this.wishlistActive = false
+      this.expandSearch = false
+      if (this.isMobile) {
+        this.$emit('drawer-open', false)
+      }
+      this.trackMenuClick('SF Menu Nav Type: All')
+      this.search()
+    },
+    setExpandSearch () {
+      if (this.searchTerm) {
+        this.expandSearch = false
+        this.search()
+      } else {
+        this.expandSearch = true
+        this.$refs.searchTerm.focus()
+      }
+    },
+    setCollapseSearch () {
+      this.expandSearch = this.searchTerm !== ''
+    },
+    setWishlistActive () {
+      this.wishlistActive = true
+      this.searchTerm = ''
+      this.searchActive = false
+      this.$tracker.event('Click', 'SF Menu Nav Saved Projects', 'Storefront Menu')
+      if (this.$route.name === 'storefront:wishlist') {
+        this.$router.push({
+          name: this.$route.name,
+          replace: true,
+          query: {
+            order: 'recent'
+          }
+        })
+      }
+    },
+    async postCall () {
+      await this.$tracker.event('Click', 'SF Menu Nav Type: Post a Call', 'Storefront Menu')
+      window.location.href = '/project_menu/list-pc/create/'
+    },
+    ...mapActions(['fetchWishlist']),
+    drawerOpen (isOpen) {
+      const body = document.body
+      const el = this.$refs.filterBar
+      this.drawerOpened = typeof isOpen === 'boolean' ? isOpen : !this.drawerOpened
+      this.filterByCategory = this.isMobile && !this.$route.query.skill
+
+      if (!el) {
+        return false
+      }
+
+      if (this.isMobile && this.drawerOpened) {
+        el.classList.add('fixed-top')
+        body.classList.add('no-scroll')
+      } else {
+        el.classList.remove('fixed-top')
+        body.classList.remove('no-scroll')
+      }
+    },
+    homeClicked () {
+      this.$tracker.event('Click', 'SF Menu: All Projects', 'Storefront Menu')
+      this.drawerOpen(false)
+      this.$emit('reset')
+    }
+  }
+}
+</script>
